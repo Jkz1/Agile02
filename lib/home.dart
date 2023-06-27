@@ -1,4 +1,6 @@
+import 'package:agile02/component/paymentOptionComponent/Qrisform.dart';
 import 'package:agile02/page/example.dart';
+import 'package:agile02/page/payment_option_box.dart';
 import 'package:agile02/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -25,7 +27,13 @@ class _HomeState extends State<Home> {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (_) => Example()));
                 },
-                child: Text("Contoh"))
+                child: Text("Contoh")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => PaymentOptionBox()));
+                },
+                child: Text("PaymentOptionBox"))
           ],
         ),
       ),
