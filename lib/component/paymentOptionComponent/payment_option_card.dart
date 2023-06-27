@@ -11,9 +11,7 @@ class PaymentOptionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (_) => QrisForm()));
-      },
+      onTap: (){print("printed");},
       child: Card(
         color: Color(0xff155E1C),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
