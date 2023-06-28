@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-class QrisForm extends StatefulWidget {
-  QrisForm({super.key});
+class DanaForm extends StatefulWidget {
+  DanaForm({super.key});
 
   @override
-  State<QrisForm> createState() => _QrisFormState();
+  State<DanaForm> createState() => _DanaFormState();
 }
 
-class _QrisFormState extends State<QrisForm> {
-  bool _haspay = false;
+class _DanaFormState extends State<DanaForm> {
+  bool _agree = false;
 
   @override
   Widget build(BuildContext context) {
@@ -28,26 +28,22 @@ class _QrisFormState extends State<QrisForm> {
             mainAxisSize: MainAxisSize.max,
             children: [
               IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back)),
-              Expanded(child: Text("QRIS Shoppepay Form", style: TextStyle(fontSize: 25), textAlign: TextAlign.center,))
+              Expanded(child: Text("Dana Form", style: TextStyle(fontSize: 25), textAlign: TextAlign.center,))
             ],
           ),
           SizedBox(height: 10,),
-          ElevatedButton(onPressed: (){}, child: Text("Download Qris Picture")),
-          SizedBox(height: 10,),
           TextField(
-            enabled: !_haspay,
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
               filled: true,
               fillColor: Colors.grey.withOpacity(0.2),
               border: OutlineInputBorder(),
               prefixIcon: Icon(Icons.phone),
-              hintText: "Your Shoppepay Number"
+              hintText: "Your Dana Number"
             ),
           ),
           SizedBox(height: 10,),
           TextField(
-            enabled: !_haspay,
             obscureText: true,
             keyboardType: TextInputType.number,
             decoration: InputDecoration(
@@ -61,12 +57,12 @@ class _QrisFormState extends State<QrisForm> {
           SizedBox(height: 10,),
           Row(
             children: [
-              Checkbox(value: _haspay, onChanged: (bool? val){
+              Checkbox(value: _agree, onChanged: (bool? val){
                 setState(() {
-                  _haspay = val!;
+                  _agree = val!;
                 });
               }),
-              Text("Saya sudah membayar melalui Qris")
+              TextButton(onPressed: (){}, child: Text("Saya menyetujui syarat dan ketentuan"))
             ],
           )
         ],

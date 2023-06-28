@@ -1,3 +1,5 @@
+import 'package:agile02/component/paymentOptionComponent/OVOForm.dart';
+import 'package:agile02/component/paymentOptionComponent/qrisForm.dart';
 import 'package:agile02/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -24,29 +26,32 @@ class _PaymentOptionBoxState extends State<PaymentOptionBox> {
   @override
   Widget build(BuildContext context) {
     return Template(
-      child: Center(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 4, vertical: 7),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.black, width: 2),
-            borderRadius: BorderRadius.all(Radius.circular(3)),
-            color: Color(0xffD9D9D9)
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: List.generate(3, (index) => PaymentOptionCard(text: PaymentOption[index])),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: List.generate(3, (index) => PaymentOptionCard(text: PaymentOption[index+3])),
-              )
-            ],
-          )
-        ),
-      ),
+      child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: [
+        OVOForm(),
+        Container(
+            padding: EdgeInsets.symmetric(horizontal: 4, vertical: 7),
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.black, width: 2),
+                borderRadius: BorderRadius.all(Radius.circular(3)),
+                color: Color(0xffD9D9D9)),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: List.generate(3,
+                      (index) => PaymentOptionCard(text: PaymentOption[index])),
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: List.generate(
+                      3,
+                      (index) =>
+                          PaymentOptionCard(text: PaymentOption[index + 3])),
+                )
+              ],
+            )),
+      ]),
     );
   }
 }
