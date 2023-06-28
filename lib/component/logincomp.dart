@@ -98,9 +98,9 @@ class LoginComp extends StatelessWidget {
                                 );
                               });
                             },
-                            child: Text('Login'),
+                            child: Text('LOGIN'),
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: 16),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

@@ -5,13 +5,30 @@ class DataProvider extends ChangeNotifier {
   bool isLoggedIn = false;
   String userLogin = "";
   final List<Map<String, String>> users = [
-    {"email": "1", "password": "1"},
-    {"email": "2", "password": "2"},
+    {
+      "username": "user1",
+      "nama": "User 1",
+      "email": "user1@mail.com",
+      "tanggal_lahir": "2023-06-26",
+      "password": "1"
+    },
+    {
+      "username": "user2",
+      "nama": "User 2",
+      "email": "user2@mail.com",
+      "tanggal_lahir": "2023-06-27",
+      "password": "2"
+    },
   ];
-  void register(String email, String password, Function() onSuccess,
-      Function(String) onError) {
-    print(users);
-    Map<String, String> newUser = {'email': email, 'password': password};
+  void register(String username, String nama, String email, String tgl_lahir,
+      String password, Function() onSuccess, Function(String) onError) {
+    Map<String, String> newUser = {
+      "username": username,
+      "nama": nama,
+      "email": email,
+      "tanggal_lahir": tgl_lahir,
+      "password": password
+    };
     users.add(newUser);
     print(users);
     notifyListeners();
