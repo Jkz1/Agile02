@@ -1,4 +1,5 @@
 import 'package:agile02/component/paymentOptionComponent/Qrisform.dart';
+import 'package:agile02/page/donation_screen.dart';
 import 'package:agile02/page/example.dart';
 import 'package:agile02/page/login.dart';
 import 'package:agile02/page/register.dart';
@@ -79,12 +80,28 @@ class _HomeState extends State<Home> {
                       context, MaterialPageRoute(builder: (_) => Example()));
                 },
                 child: Text("Contoh")),
+
+            const SizedBox(
+              height: 10,
+            ),
+
             ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => PaymentOptionBox()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => PaymentOptionBox()));
                 },
-                child: Text("PaymentOptionBox"))
+                child: Text("PaymentOptionBox")),
+
+            const SizedBox(
+              height: 10,
+            ),
+
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => DonationScreen()));
+                },
+                child: Text("Total Saldo")),
           ],
         ),
       ),

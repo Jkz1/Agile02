@@ -1,4 +1,5 @@
 import 'package:agile02/home.dart';
+import 'package:agile02/providers/donation_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:agile02/providers/data_provider.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
       providers: [
         //isi disini provider yng mo kelen pake contohnya dibawah
         // ChangeNotifierProvider(create: (_) => contohprov());
+        ChangeNotifierProvider(create: (context) => DonationModel()),
         ChangeNotifierProvider<DataProvider>(create: (_) => DataProvider()),
       ],
       child: MaterialApp(
@@ -32,7 +34,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Color(0xff3E6C29),
           primarySwatch: Colors.blue,
         ),
-      home: Home(),
+        home: Home(),
       ),
     );
   }
