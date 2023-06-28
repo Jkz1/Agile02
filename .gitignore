@@ -1,0 +1,8 @@
+/*
+
+!lib/
+!assets/
+!pubspec.lock
+!pubspec.yaml
+!.git/
+!.gitignore
