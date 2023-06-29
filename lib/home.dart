@@ -1,4 +1,3 @@
-import 'package:agile02/component/paymentOptionComponent/Qrisform.dart';
 import 'package:agile02/page/donation_screen.dart';
 import 'package:agile02/page/example.dart';
 import 'package:agile02/page/login.dart';

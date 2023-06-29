@@ -1,5 +1,7 @@
 import 'package:agile02/home.dart';
+import 'package:agile02/page/payment_option_box.dart';
 import 'package:agile02/providers/donation_model.dart';
+import 'package:agile02/providers/payment_opt_prov.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:agile02/providers/data_provider.dart';
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
         // ChangeNotifierProvider(create: (_) => contohprov());
         ChangeNotifierProvider(create: (context) => DonationModel()),
         ChangeNotifierProvider<DataProvider>(create: (_) => DataProvider()),
+        ChangeNotifierProvider(create: (_) => PaymentOptProv()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
