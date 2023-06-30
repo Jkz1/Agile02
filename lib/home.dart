@@ -1,13 +1,17 @@
+import 'package:agile02/page/about.dart';
 import 'package:agile02/page/donation_screen.dart';
 import 'package:agile02/page/example.dart';
 import 'package:agile02/page/login.dart';
+import 'package:agile02/page/pay.dart';
 import 'package:agile02/page/register.dart';
 // import 'package:agile02/page/info_akun.dart';
 import 'package:agile02/page/payment_option_box.dart';
+import 'package:agile02/providers/about_akun.dart';
 import 'package:agile02/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -19,6 +23,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    final aboutprov = Provider.of<AboutAkun>(context);
     return Template(
       child: Center(
         child: Column(
@@ -73,21 +78,11 @@ class _HomeState extends State<Home> {
             ),
 
             // Button Contoh
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => Example()));
-                },
-                child: Text("Contoh")),
-
-            const SizedBox(
-              height: 10,
-            ),
 
             ElevatedButton(
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => PaymentOptionBox()));
+                      MaterialPageRoute(builder: (_) => Template(child: PaymentOptionBox(),)));
                 },
                 child: Text("PaymentOptionBox")),
 
@@ -101,6 +96,18 @@ class _HomeState extends State<Home> {
                       MaterialPageRoute(builder: (_) => DonationScreen()));
                 },
                 child: Text("Total Saldo")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => Payment()));
+                },
+                child: Text("Pay")),
+            // ElevatedButton(
+            //     onPressed: () {
+            //       Navigator.push(context,
+            //           MaterialPageRoute(builder: (_) => About(data: aboutprov.data[0],)));
+            //     },
+            //     child: Text("About")),
           ],
         ),
       ),
