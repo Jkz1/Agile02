@@ -39,7 +39,7 @@ class DonationScreen extends StatelessWidget {
                               ),
                               alignment: Alignment.center,
                               child: Text(
-                                'Total Saldo',
+                                'Total Pendapatan',
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
