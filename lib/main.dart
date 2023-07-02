@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:agile02/providers/data_provider.dart';
 
+import 'providers/donation_provider.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<DataProvider>(create: (_) => DataProvider()),
         ChangeNotifierProvider(create: (_) => PaymentOptProv()),
         ChangeNotifierProvider(create: (_) => AboutAkun()),
+        ChangeNotifierProvider(create: (_) => DonationProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

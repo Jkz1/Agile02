@@ -13,6 +13,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
+import 'page/donatur_screen.dart';
+
 class Home extends StatefulWidget {
   const Home({super.key});
 
@@ -81,8 +83,12 @@ class _HomeState extends State<Home> {
 
             ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => Template(child: PaymentOptionBox(),)));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => Template(
+                                child: PaymentOptionBox(),
+                              )));
                 },
                 child: Text("PaymentOptionBox")),
 
@@ -98,10 +104,17 @@ class _HomeState extends State<Home> {
                 child: Text("Total Saldo")),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => Payment()));
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => Payment()));
                 },
                 child: Text("Pay")),
+
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => DonaturScreen()));
+                },
+                child: Text("Donatur")),
             // ElevatedButton(
             //     onPressed: () {
             //       Navigator.push(context,
