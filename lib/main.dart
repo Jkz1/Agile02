@@ -5,7 +5,7 @@ import 'package:agile02/providers/donation_model.dart';
 import 'package:agile02/providers/payment_opt_prov.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:agile02/providers/data_provider.dart';
+import 'package:agile02/providers/auth_provider.dart';
 
 import 'providers/donation_provider.dart';
 
