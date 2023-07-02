@@ -210,6 +210,8 @@ class _RegisterCompState extends State<RegisterComp> {
                             // Kembali ke halaman login setelah registrasi berhasil
                             Navigator.pop(context);
                           },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green),
                           child: Text('REGISTER'),
                         ),
                       ),

@@ -4,7 +4,7 @@ import 'package:agile02/page/example.dart';
 import 'package:agile02/page/login.dart';
 import 'package:agile02/page/pay.dart';
 import 'package:agile02/page/register.dart';
-// import 'package:agile02/page/info_akun.dart';
+import 'package:agile02/page/wd.dart';
 import 'package:agile02/page/payment_option_box.dart';
 import 'package:agile02/providers/about_akun.dart';
 import 'package:agile02/temp.dart';
@@ -63,17 +63,17 @@ class _HomeState extends State<Home> {
               height: 10,
             ),
 
-            // // Penarikan dana
-            // ElevatedButton(
-            //   onPressed: () {
-            //     Navigator.push(
-            //         context, MaterialPageRoute(builder: (_) => InfoAkun()));
-            //   },
-            //   child: Text("Info Akun"),
-            //   style: ElevatedButton.styleFrom(
-            //     primary: Colors.blueGrey,
-            //   ),
-            // ),
+            // Penarikan dana
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => WD()));
+              },
+              child: Text("Penarikan Dana"),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.blueGrey,
+              ),
+            ),
 
             const SizedBox(
               height: 10,

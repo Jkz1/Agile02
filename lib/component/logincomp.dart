@@ -99,6 +99,8 @@ class LoginComp extends StatelessWidget {
                                   );
                                 });
                               },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.green),
                               child: Text('LOGIN'),
                             ),
                             SizedBox(height: 16),
