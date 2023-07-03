@@ -122,12 +122,12 @@ class _HomeState extends State<Home> {
                       context, MaterialPageRoute(builder: (_) => Listacc()));
                 },
                 child: Text("Search")),
-            // ElevatedButton(
-            //     onPressed: () {
-            //       Navigator.push(context,
-            //           MaterialPageRoute(builder: (_) => About(data: aboutprov.data[0],)));
-            //     },
-            //     child: Text("About")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => About(data: aboutprov.data[0],)));
+                },
+                child: Text("About")),
           ],
         ),
       ),
