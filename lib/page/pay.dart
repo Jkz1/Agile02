@@ -1,3 +1,4 @@
+import 'package:agile02/page/payment_option_box.dart';
 import 'package:agile02/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -137,118 +138,119 @@ class _PaymentState extends State<Payment> {
                             SizedBox(
                               height: 20,
                             ),
-                            Container(
-                              width: 500,
-                              height: 200,
-                              decoration: BoxDecoration(
-                                  color: Colors.grey.shade400,
-                                  border: Border.all(
-                                    color: Colors.black,
-                                    width: 2.0,
-                                  )),
-                              child: Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        ElevatedButton(
-                                          onPressed: () {},
-                                          child: Text('Qris - ShopeePay'),
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStateProperty.all(
-                                                    Colors.green.shade900),
-                                            minimumSize:
-                                                MaterialStateProperty.all(
-                                                    Size(170, 90)),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 15,
-                                        ),
-                                        ElevatedButton(
-                                          onPressed: () {},
-                                          child: Text('OVO'),
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStateProperty.all(
-                                                    Colors.green.shade900),
-                                            minimumSize:
-                                                MaterialStateProperty.all(
-                                                    Size(105, 90)),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 15,
-                                        ),
-                                        ElevatedButton(
-                                          onPressed: () {},
-                                          child: Text('Kartu Kredit'),
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStateProperty.all(
-                                                    Colors.green.shade900),
-                                            minimumSize:
-                                                MaterialStateProperty.all(
-                                                    Size(165, 90)),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        ElevatedButton(
-                                          onPressed: () {},
-                                          child: Text('Debit / MBanking'),
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStateProperty.all(
-                                                    Colors.green.shade900),
-                                            minimumSize:
-                                                MaterialStateProperty.all(
-                                                    Size(170, 90)),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 15,
-                                        ),
-                                        ElevatedButton(
-                                          onPressed: () {},
-                                          child: Text('Dana'),
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStateProperty.all(
-                                                    Colors.green.shade900),
-                                            minimumSize:
-                                                MaterialStateProperty.all(
-                                                    Size(105, 90)),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 15,
-                                        ),
-                                        ElevatedButton(
-                                          onPressed: () {},
-                                          child: Text('PayPal'),
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStateProperty.all(
-                                                    Colors.green.shade900),
-                                            minimumSize:
-                                                MaterialStateProperty.all(
-                                                    Size(165, 90)),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            PaymentOptionBox(),
+                            // Container(
+                            //   width: 500,
+                            //   height: 200,
+                            //   decoration: BoxDecoration(
+                            //       color: Colors.grey.shade400,
+                            //       border: Border.all(
+                            //         color: Colors.black,
+                            //         width: 2.0,
+                            //       )),
+                            //   child: Column(
+                            //     children: [
+                            //       Padding(
+                            //         padding: const EdgeInsets.all(8.0),
+                            //         child: Row(
+                            //           children: [
+                            //             ElevatedButton(
+                            //               onPressed: () {},
+                            //               child: Text('Qris - ShopeePay'),
+                            //               style: ButtonStyle(
+                            //                 backgroundColor:
+                            //                     MaterialStateProperty.all(
+                            //                         Colors.green.shade900),
+                            //                 minimumSize:
+                            //                     MaterialStateProperty.all(
+                            //                         Size(170, 90)),
+                            //               ),
+                            //             ),
+                            //             SizedBox(
+                            //               width: 15,
+                            //             ),
+                            //             ElevatedButton(
+                            //               onPressed: () {},
+                            //               child: Text('OVO'),
+                            //               style: ButtonStyle(
+                            //                 backgroundColor:
+                            //                     MaterialStateProperty.all(
+                            //                         Colors.green.shade900),
+                            //                 minimumSize:
+                            //                     MaterialStateProperty.all(
+                            //                         Size(105, 90)),
+                            //               ),
+                            //             ),
+                            //             SizedBox(
+                            //               width: 15,
+                            //             ),
+                            //             ElevatedButton(
+                            //               onPressed: () {},
+                            //               child: Text('Kartu Kredit'),
+                            //               style: ButtonStyle(
+                            //                 backgroundColor:
+                            //                     MaterialStateProperty.all(
+                            //                         Colors.green.shade900),
+                            //                 minimumSize:
+                            //                     MaterialStateProperty.all(
+                            //                         Size(165, 90)),
+                            //               ),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //       ),
+                            //       Padding(
+                            //         padding: const EdgeInsets.all(8.0),
+                            //         child: Row(
+                            //           children: [
+                            //             ElevatedButton(
+                            //               onPressed: () {},
+                            //               child: Text('Debit / MBanking'),
+                            //               style: ButtonStyle(
+                            //                 backgroundColor:
+                            //                     MaterialStateProperty.all(
+                            //                         Colors.green.shade900),
+                            //                 minimumSize:
+                            //                     MaterialStateProperty.all(
+                            //                         Size(170, 90)),
+                            //               ),
+                            //             ),
+                            //             SizedBox(
+                            //               width: 15,
+                            //             ),
+                            //             ElevatedButton(
+                            //               onPressed: () {},
+                            //               child: Text('Dana'),
+                            //               style: ButtonStyle(
+                            //                 backgroundColor:
+                            //                     MaterialStateProperty.all(
+                            //                         Colors.green.shade900),
+                            //                 minimumSize:
+                            //                     MaterialStateProperty.all(
+                            //                         Size(105, 90)),
+                            //               ),
+                            //             ),
+                            //             SizedBox(
+                            //               width: 15,
+                            //             ),
+                            //             ElevatedButton(
+                            //               onPressed: () {},
+                            //               child: Text('PayPal'),
+                            //               style: ButtonStyle(
+                            //                 backgroundColor:
+                            //                     MaterialStateProperty.all(
+                            //                         Colors.green.shade900),
+                            //                 minimumSize:
+                            //                     MaterialStateProperty.all(
+                            //                         Size(165, 90)),
+                            //               ),
+                            //             ),
+                            //           ],
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                             SizedBox(
                               height: 20,
                             ),

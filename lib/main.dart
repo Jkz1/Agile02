@@ -1,11 +1,14 @@
 import 'package:agile02/home.dart';
-import 'package:agile02/page/listcreator.dart';
-import 'package:agile02/page/pay.dart';
+import 'package:agile02/page/payment_option_box.dart';
+import 'package:agile02/providers/about_akun.dart';
 import 'package:agile02/providers/donation_model.dart';
 import 'package:agile02/providers/listakun.dart';
+import 'package:agile02/providers/payment_opt_prov.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:agile02/providers/data_provider.dart';
+import 'package:agile02/providers/auth_provider.dart';
+
+import 'providers/donation_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,6 +27,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => MyCardProvider()),
         ChangeNotifierProvider(create: (context) => DonationModel()),
         ChangeNotifierProvider<DataProvider>(create: (_) => DataProvider()),
+        ChangeNotifierProvider(create: (_) => PaymentOptProv()),
+        ChangeNotifierProvider(create: (_) => AboutAkun()),
+        ChangeNotifierProvider(create: (_) => DonationProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
