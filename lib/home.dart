@@ -1,6 +1,7 @@
 import 'package:agile02/component/paymentOptionComponent/Qrisform.dart';
 import 'package:agile02/page/donation_screen.dart';
 import 'package:agile02/page/example.dart';
+import 'package:agile02/page/listcreator.dart';
 import 'package:agile02/page/login.dart';
 import 'package:agile02/page/register.dart';
 // import 'package:agile02/page/info_akun.dart';
@@ -55,6 +56,17 @@ class _HomeState extends State<Home> {
 
             const SizedBox(
               height: 10,
+            ),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => Listacc()));
+              },
+              child: Text("List akun"),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.black,
+              ),
             ),
 
             // // Penarikan dana

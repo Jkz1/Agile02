@@ -1,5 +1,8 @@
 import 'package:agile02/home.dart';
+import 'package:agile02/page/listcreator.dart';
+import 'package:agile02/page/pay.dart';
 import 'package:agile02/providers/donation_model.dart';
+import 'package:agile02/providers/listakun.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:agile02/providers/data_provider.dart';
@@ -18,6 +21,7 @@ class MyApp extends StatelessWidget {
       providers: [
         //isi disini provider yng mo kelen pake contohnya dibawah
         // ChangeNotifierProvider(create: (_) => contohprov());
+        ChangeNotifierProvider(create: (context) => MyCardProvider()),
         ChangeNotifierProvider(create: (context) => DonationModel()),
         ChangeNotifierProvider<DataProvider>(create: (_) => DataProvider()),
       ],
