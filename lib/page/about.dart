@@ -5,6 +5,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:universal_io/io.dart';
 
+//Jika terdapat error, ikuti langkah yang kubuat di readme.md
+
 class About extends StatelessWidget {
   Map<String, dynamic> data;
   About({super.key, required this.data});

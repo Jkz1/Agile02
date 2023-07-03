@@ -6,4 +6,4 @@
 !pubspec.yaml
 !.git/
 !.gitignore
-!android/app/src/main/AndroidManifest.xml
+!AndroidManifest.xml
