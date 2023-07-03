@@ -1,10 +1,11 @@
 import 'package:agile02/page/about.dart';
 import 'package:agile02/page/donation_screen.dart';
 import 'package:agile02/page/example.dart';
+import 'package:agile02/page/listcreator.dart';
 import 'package:agile02/page/login.dart';
 import 'package:agile02/page/pay.dart';
 import 'package:agile02/page/register.dart';
-// import 'package:agile02/page/info_akun.dart';
+import 'package:agile02/page/wd.dart';
 import 'package:agile02/page/payment_option_box.dart';
 import 'package:agile02/providers/about_akun.dart';
 import 'package:agile02/temp.dart';
@@ -12,6 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
+
+import 'page/donatur_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -61,17 +64,17 @@ class _HomeState extends State<Home> {
               height: 10,
             ),
 
-            // // Penarikan dana
-            // ElevatedButton(
-            //   onPressed: () {
-            //     Navigator.push(
-            //         context, MaterialPageRoute(builder: (_) => InfoAkun()));
-            //   },
-            //   child: Text("Info Akun"),
-            //   style: ElevatedButton.styleFrom(
-            //     primary: Colors.blueGrey,
-            //   ),
-            // ),
+            // Penarikan dana
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => WD()));
+              },
+              child: Text("Penarikan Dana"),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.blueGrey,
+              ),
+            ),
 
             const SizedBox(
               height: 10,
@@ -81,8 +84,12 @@ class _HomeState extends State<Home> {
 
             ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => Template(child: PaymentOptionBox(),)));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => Template(
+                                child: PaymentOptionBox(),
+                              )));
                 },
                 child: Text("PaymentOptionBox")),
 
@@ -98,10 +105,23 @@ class _HomeState extends State<Home> {
                 child: Text("Total Saldo")),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => Payment()));
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => Payment()));
                 },
                 child: Text("Pay")),
+
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => DonaturScreen()));
+                },
+                child: Text("Donatur")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => Listacc()));
+                },
+                child: Text("Search")),
             // ElevatedButton(
             //     onPressed: () {
             //       Navigator.push(context,

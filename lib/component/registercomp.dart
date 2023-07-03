@@ -2,7 +2,7 @@ import 'package:agile02/home.dart';
 import 'package:agile02/page/login.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:agile02/providers/data_provider.dart';
+import 'package:agile02/providers/auth_provider.dart';
 import 'package:intl/intl.dart';
 
 class RegisterComp extends StatefulWidget {
@@ -183,7 +183,8 @@ class _RegisterCompState extends State<RegisterComp> {
                                   ),
                                   TextSpan(
                                     text: "Bagibagi.id",
-                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
@@ -205,10 +206,12 @@ class _RegisterCompState extends State<RegisterComp> {
                                 ),
                               );
                             });
-    
+
                             // Kembali ke halaman login setelah registrasi berhasil
                             Navigator.pop(context);
                           },
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.green),
                           child: Text('REGISTER'),
                         ),
                       ),
@@ -228,7 +231,8 @@ class _RegisterCompState extends State<RegisterComp> {
                             onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => Login()),
+                                MaterialPageRoute(
+                                    builder: (context) => Login()),
                               );
                             },
                           ),
