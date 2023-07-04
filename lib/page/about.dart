@@ -69,12 +69,12 @@ class About extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton(
-                        onPressed: ()async{
+                        onPressed: () async {
                           openUrl(data["youtube"]);
                         },
                         child: Image.asset("assets/youtube.png")),
                     TextButton(
-                        onPressed: ()async{
+                        onPressed: () async {
                           openUrl(data["twitch"]);
                         },
                         child: Image.asset("assets/twitch.png")),
@@ -114,7 +114,9 @@ class About extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 13,),
+                SizedBox(
+                  height: 13,
+                ),
                 Container(
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
@@ -132,19 +134,24 @@ class About extends StatelessWidget {
                             shape: MaterialStateProperty.all<
                                     RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0)))),
+                                    borderRadius:
+                                        BorderRadius.circular(18.0)))),
                         onPressed: () {},
                         child: Text("Support Aku Disini!"),
                       ))
                     ],
                   ),
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
                   "atau",
                   style: TextStyle(color: Colors.white),
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 Container(
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
@@ -158,10 +165,14 @@ class About extends StatelessWidget {
                         Icons.people,
                         color: Color(0xff0C5513),
                       ),
-                      SizedBox(width: 5,),
+                      SizedBox(
+                        width: 5,
+                      ),
                       Text(
                         "Follow Aku",
-                        style: TextStyle(color: Color(0xff0C5513), fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            color: Color(0xff0C5513),
+                            fontWeight: FontWeight.bold),
                       )
                     ],
                   ),

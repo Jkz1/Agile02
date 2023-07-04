@@ -1,7 +1,9 @@
 import 'package:agile02/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:agile02/providers/auth_provider.dart';
+import 'package:agile02/providers/wd_provider.dart';
+
+import 'package:intl/intl.dart';
 
 class WDComp extends StatefulWidget {
   const WDComp({Key? key}) : super(key: key);
@@ -13,9 +15,17 @@ class WDComp extends StatefulWidget {
 class _WDCompState extends State<WDComp> {
   String? metodePenarikan;
   String? jumlahWD;
+
+  Map<String, dynamic> accUser = {
+    "username": 'user1',
+    "acc_bank_id": "AB1",
+    "sisa_saldo": "12000000"
+  };
+
+  TextEditingController textFieldController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final loginProvider = Provider.of<DataProvider>(context);
+    final wdProvider = Provider.of<WDProvider>(context);
 
     return SingleChildScrollView(
       child: Container(
@@ -66,9 +76,31 @@ class _WDCompState extends State<WDComp> {
                                 children: [
                                   Text("JOKO CH".toUpperCase()),
                                   SizedBox(width: 50),
-                                  const Text(
-                                    "Ubah Tujuan Penarikan",
-                                    style: TextStyle(color: Colors.red),
+                                  GestureDetector(
+                                    onTap: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: const Text("Informasi"),
+                                            content: const Text(
+                                                "Maaf, saat ini Ubah Rekening Tujuan dalam perbaikan."),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: const Text("OK"),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: Text(
+                                      "Ubah Tujuan Penarikan",
+                                      style: TextStyle(color: Colors.red),
+                                    ),
                                   ),
                                 ],
                               )
@@ -135,14 +167,23 @@ class _WDCompState extends State<WDComp> {
                       SizedBox(height: 5),
                       Row(
                         children: [
-                          const Text(
-                            "Rp. 12,512,300",
+                          Text(
+                            "Rp. ${NumberFormat('#,##0').format(int.parse(accUser['sisa_saldo']))}",
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           SizedBox(width: 10),
-                          const Text(
-                            "Tarik seluruhnya",
-                            style: TextStyle(color: Colors.red),
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                jumlahWD = accUser['sisa_saldo'].toString();
+                                textFieldController.text =
+                                    '${accUser['sisa_saldo']}';
+                              });
+                            },
+                            child: const Text(
+                              "Tarik seluruhnya",
+                              style: TextStyle(color: Colors.red),
+                            ),
                           ),
                         ],
                       ),
@@ -159,6 +200,7 @@ class _WDCompState extends State<WDComp> {
                       ),
                       SizedBox(height: 5),
                       TextField(
+                        controller: textFieldController,
                         onChanged: (value) {
                           jumlahWD = value;
                         },
@@ -171,7 +213,10 @@ class _WDCompState extends State<WDComp> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              wdProvider.tarikSaldo(
+                                  'user1', 'AB1', metodePenarikan!, jumlahWD!);
+                            },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.green),
                             child: Text('Tarik Saldo'),
@@ -187,5 +232,10 @@ class _WDCompState extends State<WDComp> {
         ),
       ),
     );
+  }
+
+  String _formatCurrency(int amount) {
+    final formatter = NumberFormat("#,###", "id_ID");
+    return 'Rp. ${formatter.format(amount)}';
   }
 }

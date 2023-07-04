@@ -7,6 +7,7 @@ import 'package:agile02/providers/payment_opt_prov.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:agile02/providers/auth_provider.dart';
+import 'package:agile02/providers/wd_provider.dart';
 
 import 'providers/donation_provider.dart';
 
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => MyCardProvider()),
         ChangeNotifierProvider(create: (context) => DonationModel()),
         ChangeNotifierProvider<DataProvider>(create: (_) => DataProvider()),
+        ChangeNotifierProvider<WDProvider>(create: (_) => WDProvider()),
         ChangeNotifierProvider(create: (_) => PaymentOptProv()),
         ChangeNotifierProvider(create: (_) => AboutAkun()),
         ChangeNotifierProvider(create: (_) => DonationProvider()),
