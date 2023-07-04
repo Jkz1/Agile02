@@ -69,10 +69,14 @@ class About extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton(
-                        onPressed: () {},
+                        onPressed: ()async{
+                          openUrl(data["youtube"]);
+                        },
                         child: Image.asset("assets/youtube.png")),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: ()async{
+                          openUrl(data["twitch"]);
+                        },
                         child: Image.asset("assets/twitch.png")),
                   ],
                 ),
