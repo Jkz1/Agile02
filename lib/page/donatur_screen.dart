@@ -36,7 +36,7 @@ class DonaturScreen extends StatelessWidget {
                         width: 80.0,
                         height: 80.0,
                         child: CircleAvatar(
-                          backgroundImage: AssetImage('assets/profile.png'),
+                          backgroundImage: AssetImage('assets/jokowi.jpg'),
                         ),
                       ),
                     ),
@@ -97,12 +97,12 @@ class DonaturInfoRow extends StatelessWidget {
           SizedBox(
             width: 80,
             child: Text(
-              '$label:',
+              '$label',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           SizedBox(width: 8.0),
-          Expanded(child: Text(value)),
+          Expanded(child: Text(': ${value}', style: TextStyle(color: label == "Donasi" ? Color(0xff0C5513) : Colors.black),)),
         ],
       ),
     );

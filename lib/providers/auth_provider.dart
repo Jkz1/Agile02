@@ -20,8 +20,10 @@ class DataProvider extends ChangeNotifier {
       "password": "2"
     },
   ];
+  // void register(String username, String nama, String email, String tgl_lahir,
+  //     String password, Function() onSuccess, Function(String) onError)
   void register(String username, String nama, String email, String tgl_lahir,
-      String password, Function() onSuccess, Function(String) onError) {
+      String password) {
     Map<String, String> newUser = {
       "username": username,
       "nama": nama,

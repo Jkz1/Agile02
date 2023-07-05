@@ -74,7 +74,7 @@ class _HomeState extends State<Home> {
               },
               child: Text("Penarikan Dana"),
               style: ElevatedButton.styleFrom(
-                primary: Colors.blueGrey,
+                primary: Colors.blueGrey, 
               ),
             ),
 

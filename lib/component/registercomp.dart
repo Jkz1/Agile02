@@ -22,34 +22,38 @@ class _RegisterCompState extends State<RegisterComp> {
     super.dispose();
   }
 
+  String username = '';
+  String nama = '';
+  String email = '';
+  String password = '';
+  String konfirmasipassword = '';
+
+  bool passwordStatus = false;
+
+  bool usernameStatus = false;
+
   @override
   Widget build(BuildContext context) {
     final registerProvider = Provider.of<DataProvider>(context);
 
-    String username = '';
-    String nama = '';
-    String email = '';
-    String password = '';
-    String konfirmasipassword = '';
-
-    void navigateToHome() {
-      // Tandai bahwa register berhasil
-      registerProvider.register(username, nama, email, tgl_lahir, password, () {
-        // Tampilkan halaman Home dan hapus stack halaman sebelumnya
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => Home()),
-          (route) => false,
-        );
-      }, (error) {
-        // Tampilkan notifikasi jika register gagal
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(error),
-          ),
-        );
-      });
-    }
+    // void navigateToHome() {
+    //   // Tandai bahwa register berhasil
+    //   registerProvider.register(username, nama, email, tgl_lahir, password, () {
+    //     // Tampilkan halaman Home dan hapus stack halaman sebelumnya
+    //     Navigator.pushAndRemoveUntil(
+    //       context,
+    //       MaterialPageRoute(builder: (context) => Home()),
+    //       (route) => false,
+    //     );
+    //   }, (error) {
+    //     // Tampilkan notifikasi jika register gagal
+    //     ScaffoldMessenger.of(context).showSnackBar(
+    //       SnackBar(
+    //         content: Text(error),
+    //       ),
+    //     );
+    //   });
+    // }
 
     return SingleChildScrollView(
       child: Container(
@@ -83,6 +87,7 @@ class _RegisterCompState extends State<RegisterComp> {
                           username = value;
                         },
                         decoration: InputDecoration(
+                          errorText: usernameStatus? "Username tidak tersedia" : null,
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -154,6 +159,7 @@ class _RegisterCompState extends State<RegisterComp> {
                         },
                         obscureText: true,
                         decoration: InputDecoration(
+                          errorText: passwordStatus? "Password tidak sama " : null,
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -169,6 +175,7 @@ class _RegisterCompState extends State<RegisterComp> {
                         },
                         obscureText: true,
                         decoration: InputDecoration(
+                          errorText: passwordStatus? "Password tidak sama" : null,
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -199,18 +206,36 @@ class _RegisterCompState extends State<RegisterComp> {
                         child: ElevatedButton(
                           onPressed: () {
                             // Panggil method register dari registerProvider
-                            registerProvider.register(username, nama, email,
-                                tgl_lahir, password, navigateToHome, (error) {
-                              // Tampilkan notifikasi jika login gagal
+                            // registerProvider.register(username, nama, email,
+                            //     tgl_lahir, password, navigateToHome, (error) {
+                            //   // Tampilkan notifikasi jika login gagal
+                            //   ScaffoldMessenger.of(context).showSnackBar(
+                            //     SnackBar(
+                            //       content: Text(error),
+                            //     ),
+                            //   );
+                            // });
+
+                            if(konfirmasipassword != password){
+                              passwordStatus = true;
+                            }
+                            if(username.length < 5){
+                              usernameStatus = true;
+                            }
+                            setState(() {});
+                            if(!passwordStatus && !usernameStatus){
+                              registerProvider.register(
+                                  username, nama, email, tgl_lahir, password);
+                              Navigator.pop(context);
+                            } else{
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text(error),
-                                ),
+                                  content: Text("Kesalahan pengisian"),
+                                  duration: Duration(milliseconds: 600),
+                                )
                               );
-                            });
-
+                            }
                             // Kembali ke halaman login setelah registrasi berhasil
-                            Navigator.pop(context);
                           },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green),
