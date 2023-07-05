@@ -152,6 +152,7 @@ class _RegisterCompState extends State<RegisterComp> {
                         onChanged: (value) {
                           password = value;
                         },
+                        obscureText: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
@@ -166,6 +167,7 @@ class _RegisterCompState extends State<RegisterComp> {
                         onChanged: (value) {
                           konfirmasipassword = value;
                         },
+                        obscureText: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
@@ -229,6 +231,7 @@ class _RegisterCompState extends State<RegisterComp> {
                               ),
                             ),
                             onTap: () {
+                              Navigator.of(context).pop();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

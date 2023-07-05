@@ -78,6 +78,7 @@ class LoginComp extends StatelessWidget {
                         onChanged: (value) {
                           password = value;
                         },
+                        obscureText: true,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
@@ -117,6 +118,7 @@ class LoginComp extends StatelessWidget {
                                     ),
                                   ),
                                   onTap: () {
+                                    Navigator.of(context).pop();
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
