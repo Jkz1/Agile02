@@ -1,9 +1,11 @@
 import 'package:agile02/page/about.dart';
 import 'package:agile02/page/donation_screen.dart';
 import 'package:agile02/page/example.dart';
+import 'package:agile02/page/homepage.dart';
 import 'package:agile02/page/listcreator.dart';
 import 'package:agile02/page/login.dart';
 import 'package:agile02/page/pay.dart';
+import 'package:agile02/page/popular.dart';
 import 'package:agile02/page/register.dart';
 import 'package:agile02/page/wd.dart';
 import 'package:agile02/page/payment_option_box.dart';
@@ -128,6 +130,18 @@ class _HomeState extends State<Home> {
                       MaterialPageRoute(builder: (_) => About(data: aboutprov.data[0],)));
                 },
                 child: Text("About")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => Popular()));
+                },
+                child: Text("Popular")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => MainHome()));
+                },
+                child: Text("Home")),
           ],
         ),
       ),
