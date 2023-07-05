@@ -40,7 +40,6 @@ class MyCardProvider with ChangeNotifier {
         username: 'jokowi5',
         imagePath: 'assets/jokowi.jpg',
         category: 'gamer'),
-    // Tambahkan data card lainnya di sini
   ];
 
   List<MyCard> get cards => _cards;

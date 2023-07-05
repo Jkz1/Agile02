@@ -19,6 +19,13 @@ class DataProvider extends ChangeNotifier {
       "tanggal_lahir": "2023-06-27",
       "password": "2"
     },
+    {
+      "username": "tes",
+      "nama": "Test",
+      "email": "test",
+      "tanggal_lahir": "2023-06-27",
+      "password": "123"
+    },
   ];
   // void register(String username, String nama, String email, String tgl_lahir,
   //     String password, Function() onSuccess, Function(String) onError)

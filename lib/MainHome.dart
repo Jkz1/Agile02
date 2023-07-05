@@ -1,4 +1,5 @@
 import 'package:agile02/page/about.dart';
+import 'package:agile02/page/aboutus.dart';
 import 'package:agile02/page/listcreator.dart';
 import 'package:agile02/providers/pageProv.dart';
 import 'package:flutter/material.dart';
@@ -31,18 +32,10 @@ class _UtamaHomeState extends State<UtamaHome> {
           });
         },
         items: const [
+          BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
+          BottomNavigationBarItem(label: "Search", icon: Icon(Icons.search)),
           BottomNavigationBarItem(
-            label: "Home",
-            icon: Icon(Icons.home)
-          ),
-          BottomNavigationBarItem(
-            label: "Search",
-            icon: Icon(Icons.search)
-          ),
-          BottomNavigationBarItem(
-            label: "About Us",
-            icon: Icon(Icons.question_mark)
-          ),
+              label: "About Us", icon: Icon(Icons.question_mark)),
         ],
       ),
       body: Stack(
@@ -52,14 +45,15 @@ class _UtamaHomeState extends State<UtamaHome> {
             child: Image.asset('assets/footer.png'),
           ),
           pageprov.selectedPage == 0
-          ? Container()
-          : pageprov.selectedPage == 1
-            ? Listacc()
-            : pageprov.selectedPage == 2
               ? Container()
-              : Container()
+              : pageprov.selectedPage == 1
+                  ? Listacc()
+                  : pageprov.selectedPage == 2
+                      ? AboutUs()
+                      : Container()
         ],
       ),
-    );;
+    );
+    ;
   }
 }

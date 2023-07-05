@@ -8,6 +8,8 @@ import 'package:agile02/providers/auth_provider.dart';
 class LoginComp extends StatelessWidget {
   const LoginComp({Key? key}) : super(key: key);
 
+  get usernameInputRegister => null;
+
   @override
   Widget build(BuildContext context) {
     final loginProvider = Provider.of<DataProvider>(context);
@@ -18,11 +20,9 @@ class LoginComp extends StatelessWidget {
     void navigateToHome(String username) {
       // Tandai bahwa login berhasil
       loginProvider.login(email, password, (String username) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text("Selamat datang ${username}"),
-          )
-        );
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Selamat datang ${username}"),
+        ));
         // Tampilkan halaman Home dan hapus stack halaman sebelumnya
         Navigator.pushAndRemoveUntil(
           context,
@@ -128,7 +128,11 @@ class LoginComp extends StatelessWidget {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Register()),
+                                        builder: (context) => Register(
+                                            usernameInputRegister:
+                                                usernameInputRegister ??
+                                                    TextEditingController()),
+                                      ),
                                     );
                                   },
                                 ),

@@ -1,8 +1,10 @@
+import 'package:agile02/page/about.dart';
 import 'package:agile02/page/popular.dart';
 import 'package:agile02/providers/listakun.dart';
 import 'package:agile02/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:agile02/providers/about_akun.dart';
 
 class Listacc extends StatefulWidget {
   const Listacc({Key? key});
@@ -26,6 +28,7 @@ class _ListaccState extends State<Listacc> {
 
   @override
   Widget build(BuildContext context) {
+    final aboutprov = Provider.of<AboutAkun>(context);
     return Consumer<MyCardProvider>(
       builder: (context, cardProvider, _) {
         var cards = cardProvider.cards;
@@ -43,7 +46,7 @@ class _ListaccState extends State<Listacc> {
                         setState(() {
                           searchinput = value;
                           print(searchinput);
-                          
+
                           // Mengupdate _filteredCards berdasarkan pencarian
                           _filteredCards = cards
                               .where((card) => card.name
@@ -77,108 +80,117 @@ class _ListaccState extends State<Listacc> {
                       ),
                     ),
                   ),
-                  if(searchinput != "")Container(
-                    width: 700,
-                    child: GridView.count(
-                      shrinkWrap: true,
-                      crossAxisCount: 2,
-                      childAspectRatio: 300 / 360,
-                      padding: EdgeInsets.all(20.0),
-                      mainAxisSpacing: 40.0,
-                      crossAxisSpacing: 20.0,
-                      children: _filteredCards.map((card) {
-                        return InkWell(
-                          onTap: () {
-                            print('Card tapped: ${card.name}');
-                          },
-                          child: Card(
-                            child: Container(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    height: 220.0,
-                                    color: Colors.white,
-                                    child: Center(
-                                      child: CircleAvatar(
-                                        radius: 100.0,
-                                        backgroundImage:
-                                            AssetImage(card.imagePath),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      color: Colors.grey.shade300,
-                                      width: double.infinity,
-                                      padding: EdgeInsets.all(8.0),
+                  if (searchinput != "")
+                    Container(
+                      width: 700,
+                      child: GridView.count(
+                        shrinkWrap: true,
+                        crossAxisCount: 2,
+                        childAspectRatio: 300 / 360,
+                        padding: EdgeInsets.all(20.0),
+                        mainAxisSpacing: 40.0,
+                        crossAxisSpacing: 20.0,
+                        children: _filteredCards.asMap().entries.map((entry) {
+                          var index = entry.key;
+                          var card = entry.value;
+                          return InkWell(
+                            onTap: () {
+                              print('Card tapped: ${card.name}');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        About(data: aboutprov.data[index])),
+                              );
+                            },
+                            child: Card(
+                              child: Container(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      height: 220.0,
+                                      color: Colors.white,
                                       child: Center(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Align(
-                                              alignment: Alignment.center,
-                                              child: Text(
-                                                card.name,
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color:
-                                                      Colors.green.shade900,
-                                                  fontSize: 36,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(height: 1.0),
-                                            Align(
-                                              alignment: Alignment.center,
-                                              child: RichText(
-                                                text: TextSpan(
-                                                  children: <TextSpan>[
-                                                    TextSpan(
-                                                      text: '@',
-                                                      style: TextStyle(
-                                                          fontSize: 18,
-                                                          color: Colors
-                                                              .grey.shade600),
-                                                    ),
-                                                    TextSpan(
-                                                      text: card.username,
-                                                      style: TextStyle(
-                                                          fontSize: 18,
-                                                          color: Colors
-                                                              .grey.shade600),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(height: 26.0),
-                                            Align(
-                                              alignment: Alignment.center,
-                                              child: Text(
-                                                card.category,
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 16,
-                                                  color: Colors.red.shade800,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
+                                        child: CircleAvatar(
+                                          radius: 100.0,
+                                          backgroundImage:
+                                              AssetImage(card.imagePath),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                    Expanded(
+                                      child: Container(
+                                        color: Colors.grey.shade300,
+                                        width: double.infinity,
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Center(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Align(
+                                                alignment: Alignment.center,
+                                                child: Text(
+                                                  card.name,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color:
+                                                        Colors.green.shade900,
+                                                    fontSize: 36,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(height: 1.0),
+                                              Align(
+                                                alignment: Alignment.center,
+                                                child: RichText(
+                                                  text: TextSpan(
+                                                    children: <TextSpan>[
+                                                      TextSpan(
+                                                        text: '@',
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color: Colors
+                                                                .grey.shade600),
+                                                      ),
+                                                      TextSpan(
+                                                        text: card.username,
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color: Colors
+                                                                .grey.shade600),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(height: 26.0),
+                                              Align(
+                                                alignment: Alignment.center,
+                                                child: Text(
+                                                  card.category,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 16,
+                                                    color: Colors.red.shade800,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                        );
-                      }).toList(),
+                          );
+                        }).toList(),
+                      ),
                     ),
-                  ),
-                  if(searchinput == "" || searchinput == null) Popular()
+                  if (searchinput == "" || searchinput == null) Popular()
                 ],
               ),
             ),

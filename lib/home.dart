@@ -28,6 +28,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  get usernameInputRegister => null;
+
   @override
   Widget build(BuildContext context) {
     final aboutprov = Provider.of<AboutAkun>(context);
@@ -42,7 +44,11 @@ class _HomeState extends State<Home> {
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => Register()));
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => Register(
+                            usernameInputRegister: usernameInputRegister ??
+                                TextEditingController())));
               },
               child: Text("Daftar"),
               style: ElevatedButton.styleFrom(
@@ -76,7 +82,7 @@ class _HomeState extends State<Home> {
               },
               child: Text("Penarikan Dana"),
               style: ElevatedButton.styleFrom(
-                primary: Colors.blueGrey, 
+                primary: Colors.blueGrey,
               ),
             ),
 
@@ -128,32 +134,36 @@ class _HomeState extends State<Home> {
                 child: Text("Search")),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => About(data: aboutprov.data[0],)));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => About(
+                                data: aboutprov.data[0],
+                              )));
                 },
                 child: Text("About")),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => Popular()));
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => Popular()));
                 },
                 child: Text("Popular")),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => MainHome()));
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => MainHome()));
                 },
                 child: Text("Home")),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => UtamaHome()));
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => UtamaHome()));
                 },
                 child: Text("MainHome")),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => AboutMe()));
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => AboutMe()));
                 },
                 child: Text("AboutMe")),
           ],

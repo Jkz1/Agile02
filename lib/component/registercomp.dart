@@ -6,7 +6,10 @@ import 'package:agile02/providers/auth_provider.dart';
 import 'package:intl/intl.dart';
 
 class RegisterComp extends StatefulWidget {
-  const RegisterComp({Key? key}) : super(key: key);
+  final TextEditingController usernameInputRegister;
+
+  const RegisterComp({Key? key, required this.usernameInputRegister})
+      : super(key: key);
 
   @override
   _RegisterCompState createState() => _RegisterCompState();
@@ -14,46 +17,42 @@ class RegisterComp extends StatefulWidget {
 
 class _RegisterCompState extends State<RegisterComp> {
   final TextEditingController _tglLahirController = TextEditingController();
+
   late String tgl_lahir;
+
+  TextEditingController username = TextEditingController();
+  TextEditingController nama = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController konfirmasipassword = TextEditingController();
+
+  bool passwordStatus = false;
+  bool usernameStatus = false;
 
   @override
   void dispose() {
     _tglLahirController.dispose();
+    username.dispose();
+    nama.dispose();
+    email.dispose();
+    password.dispose();
+    konfirmasipassword.dispose();
     super.dispose();
   }
 
-  String username = '';
-  String nama = '';
-  String email = '';
-  String password = '';
-  String konfirmasipassword = '';
-
-  bool passwordStatus = false;
-
-  bool usernameStatus = false;
+  @override
+  void initState() {
+    super.initState();
+    if (widget.usernameInputRegister.text.isNotEmpty) {
+      username.text = widget.usernameInputRegister.text;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController usernameInputRegister =
+        widget.usernameInputRegister;
     final registerProvider = Provider.of<DataProvider>(context);
-
-    // void navigateToHome() {
-    //   // Tandai bahwa register berhasil
-    //   registerProvider.register(username, nama, email, tgl_lahir, password, () {
-    //     // Tampilkan halaman Home dan hapus stack halaman sebelumnya
-    //     Navigator.pushAndRemoveUntil(
-    //       context,
-    //       MaterialPageRoute(builder: (context) => Home()),
-    //       (route) => false,
-    //     );
-    //   }, (error) {
-    //     // Tampilkan notifikasi jika register gagal
-    //     ScaffoldMessenger.of(context).showSnackBar(
-    //       SnackBar(
-    //         content: Text(error),
-    //       ),
-    //     );
-    //   });
-    // }
 
     return SingleChildScrollView(
       child: Container(
@@ -83,11 +82,10 @@ class _RegisterCompState extends State<RegisterComp> {
                       ),
                       SizedBox(height: 5),
                       TextField(
-                        onChanged: (value) {
-                          username = value;
-                        },
+                        controller: username,
                         decoration: InputDecoration(
-                          errorText: usernameStatus? "Username tidak tersedia" : null,
+                          errorText:
+                              usernameStatus ? "Username tidak tersedia" : null,
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -98,9 +96,7 @@ class _RegisterCompState extends State<RegisterComp> {
                       ),
                       SizedBox(height: 5),
                       TextField(
-                        onChanged: (value) {
-                          nama = value;
-                        },
+                        controller: nama,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
@@ -112,9 +108,7 @@ class _RegisterCompState extends State<RegisterComp> {
                       ),
                       SizedBox(height: 5),
                       TextField(
-                        onChanged: (value) {
-                          email = value;
-                        },
+                        controller: email,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                         ),
@@ -154,12 +148,11 @@ class _RegisterCompState extends State<RegisterComp> {
                       ),
                       SizedBox(height: 5),
                       TextField(
-                        onChanged: (value) {
-                          password = value;
-                        },
+                        controller: password,
                         obscureText: true,
                         decoration: InputDecoration(
-                          errorText: passwordStatus? "Password tidak sama " : null,
+                          errorText:
+                              passwordStatus ? "Password tidak sama " : null,
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -170,12 +163,11 @@ class _RegisterCompState extends State<RegisterComp> {
                       ),
                       SizedBox(height: 5),
                       TextField(
-                        onChanged: (value) {
-                          konfirmasipassword = value;
-                        },
+                        controller: konfirmasipassword,
                         obscureText: true,
                         decoration: InputDecoration(
-                          errorText: passwordStatus? "Password tidak sama" : null,
+                          errorText:
+                              passwordStatus ? "Password tidak sama" : null,
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -205,35 +197,31 @@ class _RegisterCompState extends State<RegisterComp> {
                       Center(
                         child: ElevatedButton(
                           onPressed: () {
-                            // Panggil method register dari registerProvider
-                            // registerProvider.register(username, nama, email,
-                            //     tgl_lahir, password, navigateToHome, (error) {
-                            //   // Tampilkan notifikasi jika login gagal
-                            //   ScaffoldMessenger.of(context).showSnackBar(
-                            //     SnackBar(
-                            //       content: Text(error),
-                            //     ),
-                            //   );
-                            // });
-
-                            if(konfirmasipassword != password){
-                              passwordStatus = true;
+                            if (password.text != konfirmasipassword.text) {
+                              setState(() {
+                                passwordStatus = true;
+                              });
                             }
-                            if(username.length < 5){
-                              usernameStatus = true;
+                            if (username.text.length < 5) {
+                              setState(() {
+                                usernameStatus = true;
+                              });
                             }
-                            setState(() {});
-                            if(!passwordStatus && !usernameStatus){
+                            // setState(() {});
+                            if (!passwordStatus && !usernameStatus) {
                               registerProvider.register(
-                                  username, nama, email, tgl_lahir, password);
+                                  username.text,
+                                  nama.text,
+                                  email.text,
+                                  tgl_lahir,
+                                  password.text);
                               Navigator.pop(context);
-                            } else{
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text("Kesalahan pengisian"),
-                                  duration: Duration(milliseconds: 600),
-                                )
-                              );
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text("Kesalahan pengisian"),
+                                duration: Duration(milliseconds: 600),
+                              ));
                             }
                             // Kembali ke halaman login setelah registrasi berhasil
                           },

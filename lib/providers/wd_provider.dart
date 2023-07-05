@@ -43,9 +43,6 @@ class WDProvider extends ChangeNotifier {
     };
 
     listWD.add(newWD);
-
-    print('Metode Penarikan: $metodePenarikan');
-    print('Jumlah Penarikan: $jumlahWD');
-    print(listWD);
+    notifyListeners();
   }
 }

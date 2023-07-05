@@ -1,3 +1,4 @@
+import 'package:agile02/page/pay.dart';
 import 'package:agile02/temp.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -136,7 +137,10 @@ class About extends StatelessWidget {
                                 RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.circular(18.0)))),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) => Payment()));
+                        },
                         child: Text("Support Aku Disini!"),
                       ))
                     ],

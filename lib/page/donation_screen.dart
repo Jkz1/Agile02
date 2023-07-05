@@ -1,3 +1,4 @@
+import 'package:agile02/page/wd.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:agile02/providers/donation_model.dart';
@@ -6,114 +7,120 @@ class DonationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Container(
-          padding: EdgeInsets.all(6),
-          decoration: BoxDecoration(
-            color: Color(0xFF92F090),
-            border: Border.all(color: Color(0xff0C5513), width: 2),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Consumer<DonationModel>(
-                builder: (context, donation, child) {
-                  return Table(
-                    columnWidths: const {
-                      0: FlexColumnWidth(2),
-                      1: FlexColumnWidth(2),
-                    },
-                    children: [
-                      TableRow(
-                        children: [
-                          TableCell(
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Total Pendapatan',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                          ),
-                          TableCell(
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Dana Sekarang',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      TableRow(
-                        children: [
-                          TableCell(
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Rp. ${donation.totalSaldo.toStringAsFixed(3)}',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                          ),
-                          TableCell(
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: Text(
-                                'Rp. ${donation.danaSekarang.toStringAsFixed(3)}',
-                                style: TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  );
-                },
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  // Handle penarikan dana
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: Color(0xFF30A92D),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
+      child: Container(
+        padding: EdgeInsets.all(6),
+        decoration: BoxDecoration(
+          color: Color(0xFF92F090),
+          border: Border.all(color: Color(0xff0C5513), width: 2),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Consumer<DonationModel>(
+              builder: (context, donation, child) {
+                return Table(
+                  columnWidths: const {
+                    0: FlexColumnWidth(2),
+                    1: FlexColumnWidth(2),
+                  },
                   children: [
-                    SizedBox(
-                      width: 24,
-                      height: 24,
-                      child: Image.asset('assets/Group3.png'),
+                    TableRow(
+                      children: [
+                        TableCell(
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              'Total Pendapatan',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                        TableCell(
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              'Dana Sekarang',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(width: 8),
-                    Text(
-                      'Penarikan Dana',
-                      style: TextStyle(color: Colors.white),
+                    TableRow(
+                      children: [
+                        TableCell(
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              'Rp. ${donation.totalSaldo.toStringAsFixed(3)}',
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                        TableCell(
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              'Rp. ${donation.danaSekarang.toStringAsFixed(3)}',
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
-                ),
+                );
+              },
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Handle penarikan dana
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => WD(),
+                  ),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                primary: Color(0xFF30A92D),
               ),
-            ],
-          ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: Image.asset('assets/Group3.png'),
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    'Penarikan Dana',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
-      );
+      ),
+    );
   }
 }

@@ -25,7 +25,7 @@ class _WDCompState extends State<WDComp> {
   TextEditingController textFieldController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final wdProvider = Provider.of<WDProvider>(context);
+    var wdProvider = Provider.of<WDProvider>(context);
 
     return SingleChildScrollView(
       child: Container(
@@ -43,199 +43,323 @@ class _WDCompState extends State<WDComp> {
                 ),
               ),
               SizedBox(height: 16),
-              Card(
-                child: Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Transfer saldo dari BBPay ke",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 5),
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border(
-                            left: BorderSide(width: 4, color: Colors.green),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: Card(
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          "Transfer saldo dari BBPay ke",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 5),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border(
+                              left: BorderSide(width: 4, color: Colors.green),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Text("BANK CENTRAL ASIA".toUpperCase()),
+                                    const Text(" - "),
+                                    const Text("1234567890")
+                                  ],
+                                ),
+                                SizedBox(height: 5),
+                                Row(
+                                  children: [
+                                    Text("JOKO CH".toUpperCase()),
+                                    SizedBox(width: 50),
+                                    GestureDetector(
+                                      onTap: () {
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: const Text("Informasi"),
+                                              content: const Text(
+                                                  "Maaf, saat ini Ubah Rekening Tujuan dalam perbaikan."),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: const Text("OK"),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      },
+                                      child: Text(
+                                        "Ubah Tujuan Penarikan",
+                                        style: TextStyle(color: Colors.red),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: Column(
-                            children: [
-                              Row(
+                        SizedBox(height: 16),
+                        const Text(
+                          "Metode Penarikan",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                                child: ListTile(
+                              contentPadding: EdgeInsets.all(0),
+                              title: const Text("Antrian"),
+                              leading: Radio(
+                                  value: "antrian",
+                                  groupValue: metodePenarikan,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      metodePenarikan = value;
+                                    });
+                                  }),
+                            )),
+                            Expanded(
+                                child: ListTile(
+                              contentPadding: EdgeInsets.all(0),
+                              title: Row(
                                 children: [
-                                  Text("BANK CENTRAL ASIA".toUpperCase()),
-                                  const Text(" - "),
-                                  const Text("1234567890")
-                                ],
-                              ),
-                              SizedBox(height: 5),
-                              Row(
-                                children: [
-                                  Text("JOKO CH".toUpperCase()),
-                                  SizedBox(width: 50),
-                                  GestureDetector(
-                                    onTap: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: const Text("Informasi"),
-                                            content: const Text(
-                                                "Maaf, saat ini Ubah Rekening Tujuan dalam perbaikan."),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: const Text("OK"),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                    },
-                                    child: Text(
-                                      "Ubah Tujuan Penarikan",
-                                      style: TextStyle(color: Colors.red),
+                                  const Text("Instan"),
+                                  const SizedBox(width: 10),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 4),
+                                    decoration: BoxDecoration(
+                                      color: Colors.green,
+                                    ),
+                                    child: const Text(
+                                      "Proses Cepat",
+                                      style: TextStyle(color: Colors.white),
                                     ),
                                   ),
                                 ],
-                              )
-                            ],
+                              ),
+                              leading: Radio(
+                                  value: "instan",
+                                  groupValue: metodePenarikan,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      metodePenarikan = value;
+                                    });
+                                  }),
+                            ))
+                          ],
+                        ),
+                        SizedBox(height: 16),
+                        const Text(
+                          "Saldo kamu",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Text(
+                              "Rp. ${NumberFormat('#,##0').format(int.parse(accUser['sisa_saldo']))}",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(width: 10),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  jumlahWD = accUser['sisa_saldo'].toString();
+                                  textFieldController.text =
+                                      '${accUser['sisa_saldo']}';
+                                });
+                              },
+                              child: const Text(
+                                "Tarik seluruhnya",
+                                style: TextStyle(color: Colors.red),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 16),
+                        const Text(
+                          "Jumlah Penarikan",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 5),
+                        const Text(
+                          "Minimal: Rp. 10,000 | Maksimal Rp. 100,000,000",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 12),
+                        ),
+                        SizedBox(height: 5),
+                        TextField(
+                          controller: textFieldController,
+                          onChanged: (value) {
+                            jumlahWD = value;
+                          },
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
                           ),
                         ),
-                      ),
-                      SizedBox(height: 16),
-                      const Text(
-                        "Metode Penarikan",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                              child: ListTile(
-                            contentPadding: EdgeInsets.all(0),
-                            title: const Text("Antrian"),
-                            leading: Radio(
-                                value: "antian",
-                                groupValue: metodePenarikan,
-                                onChanged: (value) {
-                                  setState(() {
-                                    metodePenarikan = value;
-                                  });
-                                }),
-                          )),
-                          Expanded(
-                              child: ListTile(
-                            contentPadding: EdgeInsets.all(0),
-                            title: Row(
-                              children: [
-                                const Text("Instan"),
-                                const SizedBox(width: 10),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  decoration: BoxDecoration(
-                                    color: Colors.green,
-                                  ),
-                                  child: const Text(
-                                    "Proses Cepat",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              ],
+                        SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                if (metodePenarikan != null &&
+                                    jumlahWD != null) {
+                                  wdProvider.tarikSaldo('user1', 'AB1',
+                                      metodePenarikan!, jumlahWD!);
+                                  metodePenarikan = null;
+                                  textFieldController.clear();
+                                } else {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                    content: Text("Kesalahan pengisian"),
+                                    duration: Duration(milliseconds: 600),
+                                  ));
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.green),
+                              child: Text('Tarik Saldo'),
                             ),
-                            leading: Radio(
-                                value: "instan",
-                                groupValue: metodePenarikan,
-                                onChanged: (value) {
-                                  setState(() {
-                                    metodePenarikan = value;
-                                  });
-                                }),
-                          ))
-                        ],
-                      ),
-                      SizedBox(height: 16),
-                      const Text(
-                        "Saldo kamu",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 5),
-                      Row(
-                        children: [
-                          Text(
-                            "Rp. ${NumberFormat('#,##0').format(int.parse(accUser['sisa_saldo']))}",
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(width: 10),
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                jumlahWD = accUser['sisa_saldo'].toString();
-                                textFieldController.text =
-                                    '${accUser['sisa_saldo']}';
-                              });
-                            },
-                            child: const Text(
-                              "Tarik seluruhnya",
-                              style: TextStyle(color: Colors.red),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 16),
-                      const Text(
-                        "Jumlah Penarikan",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 5),
-                      const Text(
-                        "Minimal: Rp. 10,000 | Maksimal Rp. 100,000,000",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 12),
-                      ),
-                      SizedBox(height: 5),
-                      TextField(
-                        controller: textFieldController,
-                        onChanged: (value) {
-                          jumlahWD = value;
-                        },
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
+                          ],
                         ),
-                      ),
-                      SizedBox(height: 16),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              wdProvider.tarikSaldo(
-                                  'user1', 'AB1', metodePenarikan!, jumlahWD!);
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.green),
-                            child: Text('Tarik Saldo'),
-                          ),
-                        ],
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: Card(
+                  child: Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("List Penarikan Dana"),
+                        SizedBox(height: 10),
+                        Center(
+                          child: Table(
+                            columnWidths: {
+                              // 0: FractionColumnWidth(0.2),
+                              0: FractionColumnWidth(0.2),
+                              1: FractionColumnWidth(0.2),
+                              2: FractionColumnWidth(0.2),
+                              3: FractionColumnWidth(0.2),
+                            },
+                            border: TableBorder.all(color: Colors.grey),
+                            children: [
+                              TableRow(
+                                children: [
+                                  TableCell(
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child: Text(
+                                        'Acc Bank ID',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                  TableCell(
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child: Text(
+                                        'Metode Penarikan',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                  TableCell(
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child: Text(
+                                        'Jumlah Penarikan',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                  TableCell(
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8),
+                                      child: Text(
+                                        'Status Penarikan',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              ...wdProvider.listWD.map((wd) {
+                                String jumlahPenarikan =
+                                    'Rp. ${wd['jumlah_penarikan'] ?? ''}';
+                                String statusPenarikan = '';
+                                if (wd['status_penarikan'] == '0') {
+                                  statusPenarikan = 'Proses';
+                                } else if (wd['status_penarikan'] == '1') {
+                                  statusPenarikan = 'Sukses';
+                                }
+                                return TableRow(
+                                  children: [
+                                    TableCell(
+                                      child: Padding(
+                                        padding: EdgeInsets.all(8),
+                                        child: Text(wd['acc_bank_id'] ?? ''),
+                                      ),
+                                    ),
+                                    TableCell(
+                                      child: Padding(
+                                        padding: EdgeInsets.all(8),
+                                        child:
+                                            Text(wd['metode_penarikan'] ?? ''),
+                                      ),
+                                    ),
+                                    TableCell(
+                                      child: Padding(
+                                        padding: EdgeInsets.all(8),
+                                        child: Text(jumlahPenarikan),
+                                      ),
+                                    ),
+                                    TableCell(
+                                      child: Padding(
+                                        padding: EdgeInsets.all(8),
+                                        child: Text(statusPenarikan),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              }).toList(),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )
             ],
           ),
         ),
       ),
     );
-  }
-
-  String _formatCurrency(int amount) {
-    final formatter = NumberFormat("#,###", "id_ID");
-    return 'Rp. ${formatter.format(amount)}';
   }
 }

@@ -1,5 +1,7 @@
+import 'package:agile02/MainHome.dart';
 import 'package:agile02/home.dart';
 import 'package:agile02/page/payment_option_box.dart';
+import 'package:agile02/page/wd.dart';
 import 'package:agile02/providers/about_akun.dart';
 import 'package:agile02/providers/donation_model.dart';
 import 'package:agile02/providers/listakun.dart';
@@ -12,6 +14,8 @@ import 'package:agile02/providers/auth_provider.dart';
 import 'package:agile02/providers/wd_provider.dart';
 
 import 'providers/donation_provider.dart';
+
+import 'page/homepage.dart';
 
 void main() {
   runApp(const MyApp());
