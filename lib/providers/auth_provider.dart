@@ -36,7 +36,7 @@ class DataProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void login(String email, String password, Function() onSuccess,
+  void login(String email, String password, Function(String username) onSuccess,
       Function(String) onError) {
     // Proses validasi login
     // Jika login berhasil, set isLoggedIn menjadi true dan simpan data login
@@ -45,7 +45,7 @@ class DataProvider extends ChangeNotifier {
       if (user['email'] == email && user['password'] == password) {
         isLoginSuccessful = true;
         isLoggedIn = true;
-        userLogin = email;
+        userLogin = user['username']!;
         break;
       }
     }
@@ -54,7 +54,7 @@ class DataProvider extends ChangeNotifier {
       print('Selamat datang ${userLogin}');
 
       // Panggil callback onSuccess untuk melakukan perubahan status login
-      onSuccess();
+      onSuccess(userLogin);
     } else {
       isLoginSuccessful = false;
       isLoggedIn = false;

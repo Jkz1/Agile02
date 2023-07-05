@@ -1,3 +1,4 @@
+import 'package:agile02/MainHome.dart';
 import 'package:agile02/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,13 +15,18 @@ class LoginComp extends StatelessWidget {
     String email = '';
     String password = '';
 
-    void navigateToHome() {
+    void navigateToHome(String username) {
       // Tandai bahwa login berhasil
-      loginProvider.login(email, password, () {
+      loginProvider.login(email, password, (String username) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Selamat datang ${username}"),
+          )
+        );
         // Tampilkan halaman Home dan hapus stack halaman sebelumnya
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => Home()),
+          MaterialPageRoute(builder: (context) => UtamaHome()),
           (route) => false,
         );
       }, (error) {

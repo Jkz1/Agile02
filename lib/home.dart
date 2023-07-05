@@ -1,4 +1,5 @@
 import 'package:agile02/page/about.dart';
+import 'package:agile02/page/aboutme.dart';
 import 'package:agile02/page/donation_screen.dart';
 import 'package:agile02/page/example.dart';
 import 'package:agile02/page/homepage.dart';
@@ -16,6 +17,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
 
+import 'MainHome.dart';
 import 'page/donatur_screen.dart';
 
 class Home extends StatefulWidget {
@@ -142,6 +144,18 @@ class _HomeState extends State<Home> {
                       MaterialPageRoute(builder: (_) => MainHome()));
                 },
                 child: Text("Home")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => UtamaHome()));
+                },
+                child: Text("MainHome")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => AboutMe()));
+                },
+                child: Text("AboutMe")),
           ],
         ),
       ),

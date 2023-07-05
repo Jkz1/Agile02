@@ -3,6 +3,7 @@ import 'package:agile02/page/payment_option_box.dart';
 import 'package:agile02/providers/about_akun.dart';
 import 'package:agile02/providers/donation_model.dart';
 import 'package:agile02/providers/listakun.dart';
+import 'package:agile02/providers/pageProv.dart';
 import 'package:agile02/providers/payment_opt_prov.dart';
 import 'package:agile02/providers/trending_data.dart';
 import 'package:provider/provider.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AboutAkun()),
         ChangeNotifierProvider(create: (_) => DonationProvider()),
         ChangeNotifierProvider(create: (_) => TrendingData()),
+        ChangeNotifierProvider(create: (_) => pageProv()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
