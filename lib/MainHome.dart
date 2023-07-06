@@ -1,6 +1,7 @@
 import 'package:agile02/page/about.dart';
 import 'package:agile02/page/aboutus.dart';
 import 'package:agile02/page/listcreator.dart';
+import 'package:agile02/providers/auth_provider.dart';
 import 'package:agile02/providers/pageProv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -18,6 +19,7 @@ class _UtamaHomeState extends State<UtamaHome> {
   @override
   Widget build(BuildContext context) {
     final pageprov = Provider.of<pageProv>(context);
+    final user = Provider.of<DataProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Image.asset('assets/title.png'),
@@ -45,7 +47,10 @@ class _UtamaHomeState extends State<UtamaHome> {
             child: Image.asset('assets/footer.png'),
           ),
           pageprov.selectedPage == 0
-              ? Container()
+              ? Container(
+                  child:
+                      Center(child: Text("Selamat datang ${user.userLogin}")),
+                )
               : pageprov.selectedPage == 1
                   ? Listacc()
                   : pageprov.selectedPage == 2

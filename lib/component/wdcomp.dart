@@ -1,4 +1,5 @@
 import 'package:agile02/home.dart';
+import 'package:agile02/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:agile02/providers/wd_provider.dart';
@@ -26,6 +27,16 @@ class _WDCompState extends State<WDComp> {
   @override
   Widget build(BuildContext context) {
     var wdProvider = Provider.of<WDProvider>(context);
+    final user = Provider.of<DataProvider>(context);
+    final bankData = user.accbank.firstWhere(
+      (bank) => bank['username'] == user.userLogin,
+      orElse: () => {},
+    );
+
+    String bankName = bankData.isNotEmpty ? bankData['nama_bank'] ?? '' : '';
+    String accountNumber = bankData.isNotEmpty ? bankData['norek'] ?? '' : '';
+    String accountOwner =
+        bankData.isNotEmpty ? bankData['nama_pemilik'] ?? '' : '';
 
     return SingleChildScrollView(
       child: Container(
@@ -68,15 +79,15 @@ class _WDCompState extends State<WDComp> {
                               children: [
                                 Row(
                                   children: [
-                                    Text("BANK CENTRAL ASIA".toUpperCase()),
+                                    Text(bankName.toUpperCase()),
                                     const Text(" - "),
-                                    const Text("1234567890")
+                                    Text(accountNumber)
                                   ],
                                 ),
                                 SizedBox(height: 5),
                                 Row(
                                   children: [
-                                    Text("JOKO CH".toUpperCase()),
+                                    Text(accountOwner.toUpperCase()),
                                     SizedBox(width: 50),
                                     GestureDetector(
                                       onTap: () {
@@ -218,7 +229,7 @@ class _WDCompState extends State<WDComp> {
                               onPressed: () {
                                 if (metodePenarikan != null &&
                                     jumlahWD != null) {
-                                  wdProvider.tarikSaldo('user1', 'AB1',
+                                  wdProvider.tarikSaldo(user.userLogin, 'AB1',
                                       metodePenarikan!, jumlahWD!);
                                   metodePenarikan = null;
                                   textFieldController.clear();
@@ -323,7 +334,13 @@ class _WDCompState extends State<WDComp> {
                                     TableCell(
                                       child: Padding(
                                         padding: EdgeInsets.all(8),
-                                        child: Text(wd['acc_bank_id'] ?? ''),
+                                        child: Text(
+                                          bankData['acc_bank_id'] != null &&
+                                                  bankData['username'] ==
+                                                      user.userLogin
+                                              ? '${bankData['nama_bank']} - ${bankData['norek']}'
+                                              : '',
+                                        ),
                                       ),
                                     ),
                                     TableCell(
