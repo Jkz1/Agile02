@@ -28,6 +28,7 @@ class _WDCompState extends State<WDComp> {
   Widget build(BuildContext context) {
     var wdProvider = Provider.of<WDProvider>(context);
     final user = Provider.of<DataProvider>(context);
+
     final bankData = user.accbank.firstWhere(
       (bank) => bank['username'] == user.userLogin,
       orElse: () => {},
@@ -320,7 +321,10 @@ class _WDCompState extends State<WDComp> {
                                   ),
                                 ],
                               ),
-                              ...wdProvider.listWD.map((wd) {
+                              ...wdProvider.listWD
+                                  .where(
+                                      (wd) => wd['username'] == user.userLogin)
+                                  .map((wd) {
                                 String jumlahPenarikan =
                                     'Rp. ${wd['jumlah_penarikan'] ?? ''}';
                                 String statusPenarikan = '';
@@ -335,7 +339,8 @@ class _WDCompState extends State<WDComp> {
                                       child: Padding(
                                         padding: EdgeInsets.all(8),
                                         child: Text(
-                                          bankData['acc_bank_id'] != null &&
+                                          bankData['acc_bank_id'] ==
+                                                      user.userAccbankID &&
                                                   bankData['username'] ==
                                                       user.userLogin
                                               ? '${bankData['nama_bank']} - ${bankData['norek']}'

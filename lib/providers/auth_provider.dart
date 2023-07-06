@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 
 class DataProvider extends ChangeNotifier {
   bool isLoggedIn = false;
-  String _userLogin = "user2";
+  String _userLogin = "user1";
+  String _userAccbankID = "AB1";
 
   get userLogin => _userLogin;
+  get userAccbankID => _userAccbankID;
+  get listUsers => users;
   final List<Map<String, String>> users = [
     {
       "username": "user1",
@@ -39,7 +42,7 @@ class DataProvider extends ChangeNotifier {
       "username": "default",
       "nama_bank": "BANK DEFAULT YA",
       "norek": "1234567890",
-      "nama_pemilik": "JOKO CH",
+      "nama_pemilik": "DEFAULT DEFAULT",
     },
     {
       "acc_bank_id": "AB1",
@@ -61,6 +64,16 @@ class DataProvider extends ChangeNotifier {
       "nama_bank": "BANK KESEJAHTERAAN EKONOMI",
       "norek": "890729101",
       "nama_pemilik": "BANK USER TEST",
+    },
+  ];
+
+  final List<Map<String, String>> mutasiBalanceUser = [
+    {
+      "acc_bank_id": "AB_DEFAULT",
+      "username": "default",
+      "nama_bank": "BANK DEFAULT YA",
+      "norek": "1234567890",
+      "nama_pemilik": "DEFAULT DEFAULT",
     },
   ];
 
