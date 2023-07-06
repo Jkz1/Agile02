@@ -3,7 +3,7 @@ import 'package:agile02/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:agile02/providers/auth_provider.dart';
+import 'package:agile02/providers/data_provider.dart';
 import 'package:provider/provider.dart';
 
 class Payment extends StatefulWidget {

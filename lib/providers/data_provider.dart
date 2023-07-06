@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 
 class DataProvider extends ChangeNotifier {
   bool isLoggedIn = false;
+  // Debug no Login
   String _userLogin = "user1";
   String _userAccbankID = "AB1";
 
   get userLogin => _userLogin;
   get userAccbankID => _userAccbankID;
+
   get listUsers => users;
   final List<Map<String, String>> users = [
     {
@@ -36,7 +38,8 @@ class DataProvider extends ChangeNotifier {
     },
   ];
 
-  final List<Map<String, String>> accbank = [
+  get accbank => _accbank;
+  final List<Map<String, String>> _accbank = [
     {
       "acc_bank_id": "AB_DEFAULT",
       "username": "default",
@@ -64,16 +67,6 @@ class DataProvider extends ChangeNotifier {
       "nama_bank": "BANK KESEJAHTERAAN EKONOMI",
       "norek": "890729101",
       "nama_pemilik": "BANK USER TEST",
-    },
-  ];
-
-  final List<Map<String, String>> mutasiBalanceUser = [
-    {
-      "acc_bank_id": "AB_DEFAULT",
-      "username": "default",
-      "nama_bank": "BANK DEFAULT YA",
-      "norek": "1234567890",
-      "nama_pemilik": "DEFAULT DEFAULT",
     },
   ];
 
@@ -120,6 +113,53 @@ class DataProvider extends ChangeNotifier {
     isLoggedIn = false;
     _userLogin = '';
 
+    notifyListeners();
+  }
+
+  // Fungsi Penarikan Dana
+  String? statusPenarikan;
+  get listWD => _listWD;
+  final List<Map<String, dynamic>> _listWD = [
+    {
+      "username": "user1",
+      "acc_bank_id": "AB1",
+      "metode_penarikan": "antrian",
+      "jumlah_penarikan": "100000",
+      "status_penarikan": "0"
+    },
+    {
+      "username": "user2",
+      "acc_bank_id": "AB2",
+      "metode_penarikan": "instan",
+      "jumlah_penarikan": "100000",
+      "status_penarikan": "1"
+    },
+    {
+      "username": "user1",
+      "acc_bank_id": "AB1",
+      "metode_penarikan": "antrian",
+      "jumlah_penarikan": "100000",
+      "status_penarikan": "0"
+    },
+  ];
+
+  void tarikSaldo(String username, String accBankId, String metodePenarikan,
+      String jumlahWD) {
+    if (metodePenarikan == "antrian") {
+      statusPenarikan = "0";
+    } else {
+      statusPenarikan = "1";
+    }
+
+    Map<String, dynamic> newWD = {
+      "username": username,
+      "acc_bank_id": accBankId,
+      "metode_penarikan": metodePenarikan,
+      "jumlah_penarikan": jumlahWD,
+      "status_penarikan": statusPenarikan,
+    };
+
+    listWD.add(newWD);
     notifyListeners();
   }
 }

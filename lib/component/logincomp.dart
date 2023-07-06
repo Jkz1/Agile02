@@ -3,7 +3,7 @@ import 'package:agile02/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:agile02/page/register.dart';
-import 'package:agile02/providers/auth_provider.dart';
+import 'package:agile02/providers/data_provider.dart';
 
 class LoginComp extends StatelessWidget {
   const LoginComp({Key? key}) : super(key: key);

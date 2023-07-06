@@ -1,8 +1,8 @@
 import 'package:agile02/home.dart';
-import 'package:agile02/providers/auth_provider.dart';
+import 'package:agile02/providers/data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:agile02/providers/wd_provider.dart';
+import 'package:agile02/providers/data_provider.dart';
 
 import 'package:intl/intl.dart';
 
@@ -26,7 +26,6 @@ class _WDCompState extends State<WDComp> {
   TextEditingController textFieldController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    var wdProvider = Provider.of<WDProvider>(context);
     final user = Provider.of<DataProvider>(context);
 
     final bankData = user.accbank.firstWhere(
@@ -230,7 +229,7 @@ class _WDCompState extends State<WDComp> {
                               onPressed: () {
                                 if (metodePenarikan != null &&
                                     jumlahWD != null) {
-                                  wdProvider.tarikSaldo(user.userLogin, 'AB1',
+                                  user.tarikSaldo(user.userLogin, 'AB1',
                                       metodePenarikan!, jumlahWD!);
                                   metodePenarikan = null;
                                   textFieldController.clear();
@@ -321,7 +320,7 @@ class _WDCompState extends State<WDComp> {
                                   ),
                                 ],
                               ),
-                              ...wdProvider.listWD
+                              ...user.listWD
                                   .where(
                                       (wd) => wd['username'] == user.userLogin)
                                   .map((wd) {

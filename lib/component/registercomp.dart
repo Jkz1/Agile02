@@ -2,7 +2,7 @@ import 'package:agile02/home.dart';
 import 'package:agile02/page/login.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:agile02/providers/auth_provider.dart';
+import 'package:agile02/providers/data_provider.dart';
 import 'package:intl/intl.dart';
 
 class RegisterComp extends StatefulWidget {
