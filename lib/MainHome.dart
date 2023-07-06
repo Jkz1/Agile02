@@ -1,4 +1,5 @@
 import 'package:agile02/page/about.dart';
+import 'package:agile02/page/aboutme.dart';
 import 'package:agile02/page/aboutus.dart';
 import 'package:agile02/page/listcreator.dart';
 import 'package:agile02/providers/data_provider.dart';
@@ -47,10 +48,7 @@ class _UtamaHomeState extends State<UtamaHome> {
             child: Image.asset('assets/footer.png'),
           ),
           pageprov.selectedPage == 0
-              ? Container(
-                  child:
-                      Center(child: Text("Selamat datang ${user.userLogin}")),
-                )
+              ? AboutMe()
               : pageprov.selectedPage == 1
                   ? Listacc()
                   : pageprov.selectedPage == 2

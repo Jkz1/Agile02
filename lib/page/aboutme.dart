@@ -81,104 +81,101 @@ class _AboutMeState extends State<AboutMe> {
 
   @override
   Widget build(BuildContext context) {
-    return Template(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 15),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                "Informasi Saya",
-                style: TextStyle(color: Colors.white, fontSize: 32),
-              ),
-              Container(
-                margin: EdgeInsets.all(15),
-                padding: EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Color(0xff0C5513))),
-                child: Column(children: [
-                  Row(
-                    children: [
-                      Column(
-                        children: [
-                          CircleAvatar(
-                            radius: 67,
-                            backgroundColor: Color(0xff0C5513),
-                            child: CircleAvatar(
-                              radius: 65,
-                              backgroundImage: AssetImage('assets/jokowi.jpg'),
-                            ),
-                          ),
-                          TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                "edit foto",
-                                style: TextStyle(color: Colors.red),
-                              ))
-                        ],
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Data(),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text("Bagikan Link Saya :  "),
-                      Text(
-                        "bagibagi.id/jokowii",
-                        style: TextStyle(color: Colors.blue),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          _showShareBottomSheet();
-                        },
-                        child: Icon(
-                          Icons.share,
-                          color: Colors.blue,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  DonationScreen(),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(color: Color(0xffD9D9D9)),
-                    child: Column(
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.only(top: 15),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              "Informasi Saya",
+              style: TextStyle(color: Colors.white, fontSize: 32),
+            ),
+            Container(
+              margin: EdgeInsets.all(15),
+              padding: EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Color(0xff0C5513))),
+              child: Column(children: [
+                Row(
+                  children: [
+                    Column(
                       children: [
-                        Text(
-                          "Riwayat Dukungan",
-                          style: TextStyle(fontSize: 16),
+                        CircleAvatar(
+                          radius: 67,
+                          backgroundColor: Color(0xff0C5513),
+                          child: CircleAvatar(
+                            radius: 65,
+                            backgroundImage: AssetImage('assets/jokowi.jpg'),
+                          ),
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        // Table(
-                        //   columnWidths: {
-                        //     0: FractionColumnWidth(0.25),
-                        //     1: FractionColumnWidth(0.75),
-                        //   },
-                        //   children: [],
-                        // )
+                        TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              "edit foto",
+                              style: TextStyle(color: Colors.red),
+                            ))
                       ],
                     ),
-                  )
-                ]),
-              ),
-            ],
-          ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Data(),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text("Bagikan Link Saya :  "),
+                    Text(
+                      "bagibagi.id/jokowii",
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        _showShareBottomSheet();
+                      },
+                      child: Icon(
+                        Icons.share,
+                        color: Colors.blue,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                DonationScreen(),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  decoration: BoxDecoration(color: Color(0xffD9D9D9)),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              "Riwayat Dukungan",
+                              style: TextStyle(fontSize: 16),
+                            ),
+                          ),
+                        ],
+                      ),
+                      DonaturScreen()
+                    ],
+                  ),
+                )
+              ]),
+            ),
+          ],
         ),
       ),
     );

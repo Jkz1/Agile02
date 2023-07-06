@@ -95,43 +95,13 @@ class _HomeState extends State<Home> {
             ElevatedButton(
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => Template(
-                                child: PaymentOptionBox(),
-                              )));
+                      context, MaterialPageRoute(builder: (_) => Payment()));
                 },
-                child: Text("PaymentOptionBox")),
-
+                child: Text("Pay")),
             const SizedBox(
               height: 10,
             ),
 
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => DonationScreen()));
-                },
-                child: Text("Total Saldo")),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => Payment()));
-                },
-                child: Text("Pay")),
-
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => DonaturScreen()));
-                },
-                child: Text("Donatur")),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => Listacc()));
-                },
-                child: Text("Search")),
             ElevatedButton(
                 onPressed: () {
                   Navigator.push(
@@ -142,30 +112,26 @@ class _HomeState extends State<Home> {
                               )));
                 },
                 child: Text("About")),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => Popular()));
-                },
-                child: Text("Popular")),
+            const SizedBox(
+              height: 10,
+            ),
+
             ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (_) => MainHome()));
                 },
                 child: Text("Home")),
+            const SizedBox(
+              height: 10,
+            ),
+
             ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (_) => UtamaHome()));
                 },
                 child: Text("MainHome")),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => AboutMe()));
-                },
-                child: Text("AboutMe")),
           ],
         ),
       ),

@@ -10,7 +10,6 @@ class DataProvider extends ChangeNotifier {
   get userLogin => _userLogin;
   get userAccbankID => _userAccbankID;
 
-  get listUsers => users;
   final List<Map<String, String>> users = [
     {
       "username": "user1",
@@ -38,8 +37,7 @@ class DataProvider extends ChangeNotifier {
     },
   ];
 
-  get accbank => _accbank;
-  final List<Map<String, String>> _accbank = [
+  final List<Map<String, String>> accbank = [
     {
       "acc_bank_id": "AB_DEFAULT",
       "username": "default",
@@ -118,8 +116,7 @@ class DataProvider extends ChangeNotifier {
 
   // Fungsi Penarikan Dana
   String? statusPenarikan;
-  get listWD => _listWD;
-  final List<Map<String, dynamic>> _listWD = [
+  final List<Map<String, dynamic>> listWD = [
     {
       "username": "user1",
       "acc_bank_id": "AB1",
