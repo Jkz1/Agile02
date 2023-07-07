@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Color(0xff3E6C29),
           primarySwatch: Colors.blue,
         ),
-        home: WD(),
+        home: MainHome(),
       ),
     );
   }
