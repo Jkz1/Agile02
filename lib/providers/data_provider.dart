@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class DataProvider extends ChangeNotifier {
   bool _isLoggedIn = false;
   // Debug no Login
-  String _userLogin = "";
+  String _userLogin = "test";
 
   get isLoggedIn => _isLoggedIn;
   get userLogin => _userLogin;
@@ -218,7 +219,8 @@ class DataProvider extends ChangeNotifier {
   }
 
 // Fungsi Penarikan Dana
-  void tarikSaldo(String username, String metodePenarikan, String jumlahWD) {
+  void tarikSaldo(String username, String metodePenarikan, String jumlahWD,
+      String namabank, String noRek, String aN) {
     String statusPenarikan;
     if (metodePenarikan == "antrian") {
       statusPenarikan = "0";
@@ -226,14 +228,16 @@ class DataProvider extends ChangeNotifier {
       statusPenarikan = "1";
     }
     int jumlahPenarikan = int.parse(jumlahWD);
+    String currentDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+
     Map<String, dynamic> newWD = {
       "id_wd": "WD-09028190",
-      "nama_bank": "BANK DEFAULT YA",
-      "norek": "1234567890",
-      "nama_pemilik": "DEFAULT DEFAULT",
+      "nama_bank": namabank,
+      "norek": noRek,
+      "nama_pemilik": aN,
       "metode_penarikan": metodePenarikan,
       "jumlah_penarikan": jumlahPenarikan,
-      "tanggal_penarikan": "2023-07-07",
+      "tanggal_penarikan": currentDate,
       "status_penarikan": statusPenarikan
     };
 

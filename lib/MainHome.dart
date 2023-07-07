@@ -2,6 +2,7 @@ import 'package:agile02/home.dart';
 import 'package:agile02/page/about.dart';
 import 'package:agile02/page/aboutme.dart';
 import 'package:agile02/page/aboutus.dart';
+import 'package:agile02/page/homepage.dart';
 import 'package:agile02/page/listcreator.dart';
 import 'package:agile02/providers/data_provider.dart';
 import 'package:agile02/providers/pageProv.dart';
@@ -72,7 +73,7 @@ class _UtamaHomeState extends State<UtamaHome> {
                     Navigator.of(context).pop();
                     Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => Home()),
+                      MaterialPageRoute(builder: (context) => MainHome()),
                       (route) => false,
                     );
                   }

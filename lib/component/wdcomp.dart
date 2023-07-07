@@ -15,17 +15,20 @@ class WDComp extends StatefulWidget {
 
 class _WDCompState extends State<WDComp> {
   String? metodePenarikan;
+  String? namaBank;
+  String? noRek;
+  String? aN;
   String? jumlahWD;
 
-  TextEditingController textFieldController = TextEditingController();
+  TextEditingController jumlahwd = TextEditingController();
+  TextEditingController namabank = TextEditingController();
+  TextEditingController norek = TextEditingController();
+  TextEditingController an = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<DataProvider>(context);
-    String sisaSaldo = user.sumSaldo('test').toString();
-    Map<String, dynamic> accUser = {
-      "username": 'test',
-      "sisa_saldo": sisaSaldo
-    };
+    String? userLogin = user.userLogin;
+    String sisaSaldo = user.sumSaldo(user.userLogin).toString();
 
     return SingleChildScrollView(
       child: Container(
@@ -68,42 +71,72 @@ class _WDCompState extends State<WDComp> {
                               children: [
                                 Row(
                                   children: [
-                                    Text("BANK CENTRAL ASIA"),
+                                    Expanded(
+                                      child: TextField(
+                                        controller: namabank,
+                                        onChanged: (value) {
+                                          namaBank = value;
+                                        },
+                                        decoration: InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            hintText: "Nama Bank"),
+                                      ),
+                                    ),
                                     const Text(" - "),
-                                    Text("1122334455")
+                                    Expanded(
+                                      child: TextField(
+                                        controller: norek,
+                                        onChanged: (value) {
+                                          noRek = value;
+                                        },
+                                        decoration: InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            hintText: "Nomor Rekening"),
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 SizedBox(height: 5),
                                 Row(
                                   children: [
-                                    Text("USER TEST"),
-                                    SizedBox(width: 50),
-                                    GestureDetector(
-                                      onTap: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title: const Text("Informasi"),
-                                              content: const Text(
-                                                  "Maaf, saat ini Ubah Rekening Tujuan dalam perbaikan."),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: const Text("OK"),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      },
-                                      child: Text(
-                                        "Ubah Tujuan Penarikan",
-                                        style: TextStyle(color: Colors.red),
+                                    Expanded(
+                                      child: TextField(
+                                        controller: an,
+                                        onChanged: (value) {
+                                          aN = value;
+                                        },
+                                        decoration: InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            hintText: "Nama Penerima"),
                                       ),
                                     ),
+                                    // SizedBox(width: 50),
+                                    // GestureDetector(
+                                    //   onTap: () {
+                                    //     showDialog(
+                                    //       context: context,
+                                    //       builder: (BuildContext context) {
+                                    //         return AlertDialog(
+                                    //           title: const Text("Informasi"),
+                                    //           content: const Text(
+                                    //               "Maaf, saat ini Ubah Rekening Tujuan dalam perbaikan."),
+                                    //           actions: [
+                                    //             TextButton(
+                                    //               onPressed: () {
+                                    //                 Navigator.of(context).pop();
+                                    //               },
+                                    //               child: const Text("OK"),
+                                    //             ),
+                                    //           ],
+                                    //         );
+                                    //       },
+                                    //     );
+                                    //   },
+                                    //   child: Text(
+                                    //     "Ubah Tujuan Penarikan",
+                                    //     style: TextStyle(color: Colors.red),
+                                    //   ),
+                                    // ),
                                   ],
                                 )
                               ],
@@ -170,16 +203,15 @@ class _WDCompState extends State<WDComp> {
                         Row(
                           children: [
                             Text(
-                              "Rp. ${NumberFormat('#,##0').format(int.parse(accUser['sisa_saldo']))}",
+                              "Rp. ${NumberFormat('#,##0').format(int.parse(sisaSaldo))}",
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                             SizedBox(width: 10),
                             GestureDetector(
                               onTap: () {
                                 setState(() {
-                                  jumlahWD = accUser['sisa_saldo'].toString();
-                                  textFieldController.text =
-                                      '${accUser['sisa_saldo']}';
+                                  jumlahWD = sisaSaldo.toString();
+                                  jumlahwd.text = '$sisaSaldo';
                                 });
                               },
                               child: const Text(
@@ -202,7 +234,7 @@ class _WDCompState extends State<WDComp> {
                         ),
                         SizedBox(height: 5),
                         TextField(
-                          controller: textFieldController,
+                          controller: jumlahwd,
                           onChanged: (value) {
                             jumlahWD = value;
                           },
@@ -218,10 +250,15 @@ class _WDCompState extends State<WDComp> {
                               onPressed: () {
                                 if (metodePenarikan != null &&
                                     jumlahWD != null) {
-                                  user.tarikSaldo(user.userLogin,
-                                      metodePenarikan!, jumlahWD!);
+                                  user.tarikSaldo(
+                                      user.userLogin,
+                                      metodePenarikan!,
+                                      jumlahWD!,
+                                      namaBank!,
+                                      noRek!,
+                                      aN!);
                                   metodePenarikan = null;
-                                  textFieldController.clear();
+                                  jumlahwd.clear();
                                 } else {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(SnackBar(
@@ -310,8 +347,8 @@ class _WDCompState extends State<WDComp> {
                                 ],
                               ),
                               ...user.users
-                                  .where((user) =>
-                                      user['username'] == accUser['username'])
+                                  .where(
+                                      (user) => user['username'] == userLogin)
                                   .expand(
                                       (user) => user['penarikan_dana'] ?? [])
                                   .map((wd) {

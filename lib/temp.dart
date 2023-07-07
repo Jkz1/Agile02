@@ -1,5 +1,6 @@
 import 'package:agile02/MainHome.dart';
 import 'package:agile02/home.dart';
+import 'package:agile02/page/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -71,7 +72,7 @@ class _TemplateState extends State<Template> {
                     Navigator.of(context).pop();
                     Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => Home()),
+                      MaterialPageRoute(builder: (context) => MainHome()),
                       (route) => false,
                     );
                   }
