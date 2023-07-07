@@ -92,26 +92,26 @@ class _HomeState extends State<Home> {
 
             // Button Contoh
 
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => Payment()));
-                },
-                child: Text("Pay")),
-            const SizedBox(
-              height: 10,
-            ),
+            // ElevatedButton(
+            //     onPressed: () {
+            //       Navigator.push(
+            //           context, MaterialPageRoute(builder: (_) => Payment()));
+            //     },
+            //     child: Text("Pay")),
+            // const SizedBox(
+            //   height: 10,
+            // ),
 
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => About(
-                                data: aboutprov.data[0],
-                              )));
-                },
-                child: Text("About")),
+            // ElevatedButton(
+            //     onPressed: () {
+            //       Navigator.push(
+            //           context,
+            //           MaterialPageRoute(
+            //               builder: (_) => About(
+            //                     username: aboutprov.data[0],
+            //                   )));
+            //     },
+            //     child: Text("About")),
             const SizedBox(
               height: 10,
             ),

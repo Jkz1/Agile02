@@ -4,6 +4,8 @@ import 'package:agile02/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:agile02/providers/data_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../component/aboutmeComp.dart';
 
@@ -81,6 +83,10 @@ class _AboutMeState extends State<AboutMe> {
 
   @override
   Widget build(BuildContext context) {
+    var users = Provider.of<DataProvider>(context);
+    var userLogin = users.userLogin;
+    var user = users.users;
+
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(top: 15),
@@ -99,37 +105,12 @@ class _AboutMeState extends State<AboutMe> {
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(color: Color(0xff0C5513))),
               child: Column(children: [
-                Row(
-                  children: [
-                    Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 67,
-                          backgroundColor: Color(0xff0C5513),
-                          child: CircleAvatar(
-                            radius: 65,
-                            backgroundImage: AssetImage('assets/jokowi.jpg'),
-                          ),
-                        ),
-                        TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              "edit foto",
-                              style: TextStyle(color: Colors.red),
-                            ))
-                      ],
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Data(),
-                  ],
-                ),
+                Data(),
                 Row(
                   children: [
                     Text("Bagikan Link Saya :  "),
                     Text(
-                      "bagibagi.id/jokowii",
+                      "bagibagi.id/${userLogin}",
                       style: TextStyle(color: Colors.blue),
                     ),
                     SizedBox(

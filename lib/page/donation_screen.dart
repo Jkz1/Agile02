@@ -2,10 +2,16 @@ import 'package:agile02/page/wd.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:agile02/providers/donation_model.dart';
+import 'package:agile02/providers/data_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class DonationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var donaturProvider = Provider.of<DataProvider>(context);
+    var userLogin = donaturProvider.userLogin;
+
     return Center(
       child: Container(
         padding: EdgeInsets.all(6),
@@ -60,7 +66,7 @@ class DonationScreen extends StatelessWidget {
                           child: Container(
                             alignment: Alignment.center,
                             child: Text(
-                              'Rp. ${donation.totalSaldo.toStringAsFixed(3)}',
+                              'Rp. ${NumberFormat.currency(locale: 'id_ID', symbol: '').format(donaturProvider.sumTotalPendapatan(userLogin))}',
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -73,7 +79,7 @@ class DonationScreen extends StatelessWidget {
                           child: Container(
                             alignment: Alignment.center,
                             child: Text(
-                              'Rp. ${donation.danaSekarang.toStringAsFixed(3)}',
+                              'Rp. ${NumberFormat.currency(locale: 'id_ID', symbol: '').format(donaturProvider.sumSaldo(userLogin))}',
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,

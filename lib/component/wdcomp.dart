@@ -17,26 +17,15 @@ class _WDCompState extends State<WDComp> {
   String? metodePenarikan;
   String? jumlahWD;
 
-  Map<String, dynamic> accUser = {
-    "username": 'user1',
-    "acc_bank_id": "AB1",
-    "sisa_saldo": "12000000"
-  };
-
   TextEditingController textFieldController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<DataProvider>(context);
-
-    final bankData = user.accbank.firstWhere(
-      (bank) => bank['username'] == user.userLogin,
-      orElse: () => {},
-    );
-
-    String bankName = bankData.isNotEmpty ? bankData['nama_bank'] ?? '' : '';
-    String accountNumber = bankData.isNotEmpty ? bankData['norek'] ?? '' : '';
-    String accountOwner =
-        bankData.isNotEmpty ? bankData['nama_pemilik'] ?? '' : '';
+    String sisaSaldo = user.sumSaldo('test').toString();
+    Map<String, dynamic> accUser = {
+      "username": 'test',
+      "sisa_saldo": sisaSaldo
+    };
 
     return SingleChildScrollView(
       child: Container(
@@ -79,15 +68,15 @@ class _WDCompState extends State<WDComp> {
                               children: [
                                 Row(
                                   children: [
-                                    Text(bankName.toUpperCase()),
+                                    Text("BANK CENTRAL ASIA"),
                                     const Text(" - "),
-                                    Text(accountNumber)
+                                    Text("1122334455")
                                   ],
                                 ),
                                 SizedBox(height: 5),
                                 Row(
                                   children: [
-                                    Text(accountOwner.toUpperCase()),
+                                    Text("USER TEST"),
                                     SizedBox(width: 50),
                                     GestureDetector(
                                       onTap: () {
@@ -229,7 +218,7 @@ class _WDCompState extends State<WDComp> {
                               onPressed: () {
                                 if (metodePenarikan != null &&
                                     jumlahWD != null) {
-                                  user.tarikSaldo(user.userLogin, 'AB1',
+                                  user.tarikSaldo(user.userLogin,
                                       metodePenarikan!, jumlahWD!);
                                   metodePenarikan = null;
                                   textFieldController.clear();
@@ -282,7 +271,7 @@ class _WDCompState extends State<WDComp> {
                                     child: Padding(
                                       padding: EdgeInsets.all(8),
                                       child: Text(
-                                        'Acc Bank ID',
+                                        'Acc Bank ',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -320,9 +309,11 @@ class _WDCompState extends State<WDComp> {
                                   ),
                                 ],
                               ),
-                              ...user.listWD
-                                  .where(
-                                      (wd) => wd['username'] == user.userLogin)
+                              ...user.users
+                                  .where((user) =>
+                                      user['username'] == accUser['username'])
+                                  .expand(
+                                      (user) => user['penarikan_dana'] ?? [])
                                   .map((wd) {
                                 String jumlahPenarikan =
                                     'Rp. ${wd['jumlah_penarikan'] ?? ''}';
@@ -338,13 +329,7 @@ class _WDCompState extends State<WDComp> {
                                       child: Padding(
                                         padding: EdgeInsets.all(8),
                                         child: Text(
-                                          bankData['acc_bank_id'] ==
-                                                      user.userAccbankID &&
-                                                  bankData['username'] ==
-                                                      user.userLogin
-                                              ? '${bankData['nama_bank']} - ${bankData['norek']}'
-                                              : '',
-                                        ),
+                                            '${wd['nama_bank'] ?? '-'} - ${wd['norek'] ?? ''}'),
                                       ),
                                     ),
                                     TableCell(

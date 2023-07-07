@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PaymentOptProv extends ChangeNotifier{
-  List<bool> _selectedOption = [
-    true,
-    true,
-    true,
-    true,
-    true,
-    true
-  ];
+class PaymentOptProv extends ChangeNotifier {
+  List<bool> _selectedOption = [true, true, true, true, true, true];
 
   List<String> _paymentOption = [
     "QRIS - ShoppePay",
@@ -22,23 +15,34 @@ class PaymentOptProv extends ChangeNotifier{
   List<bool> get selectedOption => _selectedOption;
   List<String> get paymentOption => _paymentOption;
 
-  set setselectedOption(val){
+  set setselectedOption(val) {
     _selectedOption = val;
     notifyListeners();
   }
-  set setpaymentOption(val){
+
+  set setpaymentOption(val) {
     _paymentOption = val;
     notifyListeners();
   }
 
-  falseall(){
+  falseall() {
     _selectedOption = List.generate(6, (index) => false);
     notifyListeners();
   }
 
-  setboxstatus(int index){
+  setboxstatus(int index) {
     _selectedOption[index] = true;
     notifyListeners();
   }
 
+  String getSelectedPaymentOption() {
+    String selectedPaymentOption = '';
+    for (int i = 0; i < _selectedOption.length; i++) {
+      if (_selectedOption[i]) {
+        selectedPaymentOption = _paymentOption[i];
+        break;
+      }
+    }
+    return selectedPaymentOption;
+  }
 }

@@ -1,4 +1,5 @@
 import 'package:agile02/MainHome.dart';
+import 'package:agile02/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -51,16 +52,28 @@ class _TemplateState extends State<Template> {
                     setState(() {
                       pageprov.setselectedPage = 0;
                     });
-
+                    Navigator.of(context).pop();
                     Navigator.push(context,
                         MaterialPageRoute(builder: (_) => UtamaHome()));
                   } else if (value == "search") {
                     setState(() {
                       pageprov.setselectedPage = 1;
                     });
-
+                    Navigator.of(context).pop();
                     Navigator.push(context,
                         MaterialPageRoute(builder: (_) => UtamaHome()));
+                  } else if (value == "logout") {
+                    setState(() {
+                      user.setLoggedIn = false;
+                      user.setUserLogin = "";
+                      pageprov.setselectedPage = 0;
+                    });
+                    Navigator.of(context).pop();
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => Home()),
+                      (route) => false,
+                    );
                   }
                 }
               },
@@ -72,6 +85,10 @@ class _TemplateState extends State<Template> {
                 const PopupMenuItem<String>(
                   value: 'search',
                   child: Text('Cari Creator'),
+                ),
+                const PopupMenuItem<String>(
+                  value: 'logout',
+                  child: Text('Logout'),
                 ),
               ],
             ),
