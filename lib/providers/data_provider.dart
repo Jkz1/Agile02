@@ -4,8 +4,8 @@ import 'package:intl/intl.dart';
 
 class DataProvider extends ChangeNotifier {
   bool _isLoggedIn = false;
-  // Debug no Login
-  String _userLogin = "test";
+  // Debug  Login
+  String _userLogin = "";
 
   get isLoggedIn => _isLoggedIn;
   get userLogin => _userLogin;
