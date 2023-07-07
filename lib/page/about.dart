@@ -8,10 +8,16 @@ import 'package:universal_io/io.dart';
 
 //Jika terdapat error, ikuti langkah yang kubuat di readme.md
 
-class About extends StatelessWidget {
+class About extends StatefulWidget {
   Map<String, dynamic> data;
   About({super.key, required this.data});
 
+  @override
+  State<About> createState() => _AboutState();
+}
+
+class _AboutState extends State<About> {
+  bool isFollowing = false;
   @override
   Widget build(BuildContext context) {
     openUrl(String urltujuan) async {
@@ -28,8 +34,8 @@ class About extends StatelessWidget {
     }
 
     String job = "";
-    for (int i = 0; i < data["job"].length; i++) {
-      job += data["job"][i];
+    for (int i = 0; i < widget.data["job"].length; i++) {
+      job += widget.data["job"][i];
     }
     print(job);
     return Template(
@@ -44,7 +50,7 @@ class About extends StatelessWidget {
                   backgroundColor: Color(0xff0C5513),
                   radius: 63,
                   child: CircleAvatar(
-                    backgroundImage: AssetImage(data["img"]),
+                    backgroundImage: AssetImage(widget.data["img"]),
                     radius: 60,
                   ),
                 ),
@@ -52,11 +58,11 @@ class About extends StatelessWidget {
                   height: 4,
                 ),
                 Text(
-                  data["name"],
+                  widget.data["name"],
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 Text(
-                  "@${data["username"]}",
+                  "@${widget.data["username"]}",
                   style: TextStyle(color: Colors.white),
                 ),
                 SizedBox(
@@ -71,12 +77,12 @@ class About extends StatelessWidget {
                   children: [
                     TextButton(
                         onPressed: () async {
-                          openUrl(data["youtube"]);
+                          openUrl(widget.data["youtube"]);
                         },
                         child: Image.asset("assets/youtube.png")),
                     TextButton(
                         onPressed: () async {
-                          openUrl(data["twitch"]);
+                          openUrl(widget.data["twitch"]);
                         },
                         child: Image.asset("assets/twitch.png")),
                   ],
@@ -111,7 +117,7 @@ class About extends StatelessWidget {
                       SizedBox(
                         height: 10,
                       ),
-                      Text(data["desc"])
+                      Text(widget.data["desc"])
                     ],
                   ),
                 ),
@@ -146,41 +152,64 @@ class About extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "atau",
-                  style: TextStyle(color: Colors.white),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                      color: Color(0xff92F090),
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(color: Color(0xff0C5513), width: 1.5)),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.people,
-                        color: Color(0xff0C5513),
+                isFollowing
+                    ? SizedBox()
+                    : Container(
+                        child: Column(children: [
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "atau",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                        ]),
                       ),
-                      SizedBox(
-                        width: 5,
+                isFollowing
+                    ? SizedBox() // If user is already following, hide the button
+                    : GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isFollowing = true;
+                          });
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("Berhasil mengikuti Creator"),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: Color(0xff92F090),
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(
+                                color: Color(0xff0C5513), width: 1.5),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.people,
+                                color: Color(0xff0C5513),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Follow Aku",
+                                style: TextStyle(
+                                  color: Color(0xff0C5513),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                      Text(
-                        "Follow Aku",
-                        style: TextStyle(
-                            color: Color(0xff0C5513),
-                            fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                )
               ],
             ),
           ),

@@ -28,22 +28,42 @@ class _MainHomeState extends State<MainHome> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   TextButton(
-                      onPressed: () {},
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.zoom_in,
-                            color: Colors.white,
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            "Cari",
-                            style: TextStyle(color: Colors.white),
-                          )
-                        ],
-                      )),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Informasi"),
+                            content: Text(
+                                "Anda harus Login untuk melihat atau mencari Creator"),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text("OK"),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.zoom_in,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          "Cari",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
                   SizedBox(
                     width: 10,
                   ),
