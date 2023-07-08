@@ -62,6 +62,10 @@ class DonaturScreen extends StatelessWidget {
                       label: 'Pesan',
                       value: donasi['pesan'],
                     ),
+                    DonaturInfoRow(
+                      label: 'Metode Pembayaran',
+                      value: donasi['metode'],
+                    ),
                   ],
                 ),
               ),

@@ -177,7 +177,8 @@ class _PaymentState extends State<Payment> {
                                     nominal_pengirim.text,
                                     nama_pengirim.text,
                                     email_pengirim.text,
-                                    pesan_pengirim.text);
+                                    pesan_pengirim.text,
+                                    paymentOpt.getSelectedPaymentOption());
 
                                 // Membuat showDialog dengan detail donasi
                                 showDialog(

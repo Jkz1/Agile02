@@ -33,6 +33,14 @@ class _DataState extends State<Data> {
     var users = Provider.of<DataProvider>(context);
     var userLogin =
         users.users.firstWhere((user) => user['username'] == users.userLogin);
+
+    if (userLogin.isEmpty) {
+      return Scaffold(
+        body: Center(
+          child: Text('User not found.'),
+        ),
+      );
+    }
     return Row(
       children: [
         Column(
@@ -42,15 +50,38 @@ class _DataState extends State<Data> {
               backgroundColor: Color(0xff0C5513),
               child: CircleAvatar(
                 radius: 65,
-                backgroundImage: AssetImage('assets/jokowi.jpg'),
+                backgroundImage: AssetImage(userLogin['img_profil'] ?? ''),
               ),
             ),
             TextButton(
-                onPressed: () {},
+              onPressed: () {},
+              child: GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Informasi"),
+                        content: const Text(
+                            "Maaf, saat ini Ubah Foto dalam pengembangan."),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("OK"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
                 child: Text(
                   "edit foto",
                   style: TextStyle(color: Colors.red),
-                ))
+                ),
+              ),
+            )
           ],
         ),
         SizedBox(
@@ -81,11 +112,34 @@ class _DataState extends State<Data> {
                 ),
               ),
               TextButton(
-                  onPressed: () {},
+                onPressed: () {},
+                child: GestureDetector(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text("Informasi"),
+                          content: const Text(
+                              "Maaf, saat ini Ubah Data dalam pengembangan."),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("OK"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
                   child: Text(
-                    "edit foto",
+                    "edit data",
                     style: TextStyle(color: Colors.red),
-                  ))
+                  ),
+                ),
+              )
             ],
           ),
         ),
