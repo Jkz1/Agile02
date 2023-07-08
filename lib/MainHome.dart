@@ -19,10 +19,11 @@ class UtamaHome extends StatefulWidget {
 class _UtamaHomeState extends State<UtamaHome> {
   @override
   Widget build(BuildContext context) {
-    final pageprov = Provider.of<pageProv>(context);
+    final pageprov = Provider.of<PageProv>(context);
     final user = Provider.of<DataProvider>(context);
     return Scaffold(
       appBar: AppBar(
+        leading: Container(),
         title: Image.asset('assets/title.png'),
       ),
       bottomNavigationBar: BottomNavigationBar(

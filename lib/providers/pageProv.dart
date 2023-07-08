@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class pageProv extends ChangeNotifier{
+class PageProv extends ChangeNotifier{
   int _selectedPage = 0;
 
   int get selectedPage  => _selectedPage;

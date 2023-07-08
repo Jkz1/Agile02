@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:agile02/page/register.dart';
 import 'package:agile02/providers/data_provider.dart';
 
+import '../providers/provUtama.dart';
+
 class LoginComp extends StatelessWidget {
   const LoginComp({Key? key}) : super(key: key);
 
@@ -12,32 +14,13 @@ class LoginComp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loginProvider = Provider.of<DataProvider>(context);
+    final mainprov = Provider.of<ProvUtama>(context);
+
+    var passwordController = TextEditingController();
+    var emailController = TextEditingController();
 
     String email = '';
     String password = '';
-
-    void navigateToHome(String username) {
-      // Tandai bahwa login berhasil
-      loginProvider.login(email, password, (String username) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Selamat datang ${username}"),
-        ));
-        // Tampilkan halaman Home dan hapus stack halaman sebelumnya
-        Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => UtamaHome()),
-          (route) => false,
-        );
-      }, (error) {
-        // Tampilkan notifikasi jika login gagal
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(error),
-          ),
-        );
-      });
-    }
 
     return SingleChildScrollView(
       child: Container(
@@ -67,6 +50,7 @@ class LoginComp extends StatelessWidget {
                       ),
                       SizedBox(height: 5),
                       TextField(
+                        controller: emailController,
                         onChanged: (value) {
                           email = value;
                         },
@@ -81,6 +65,7 @@ class LoginComp extends StatelessWidget {
                       ),
                       SizedBox(height: 5),
                       TextField(
+                        controller: passwordController,
                         onChanged: (value) {
                           password = value;
                         },
@@ -96,9 +81,33 @@ class LoginComp extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () {
                                 // Panggil method login dengan menggunakan callback navigateToHome
-                                loginProvider.login(
-                                    email, password, navigateToHome, (error) {
+                                // loginProvider.login(
+                                //     email, password, navigateToHome, (error) {
+                                //   // Tampilkan notifikasi jika login gagal
+                                //   ScaffoldMessenger.of(context).showSnackBar(
+                                //     SnackBar(
+                                //       content: Text(error),
+                                //     ),
+                                //   );
+                                // });
+                                emailController.text = "";
+                                passwordController.text = "";
+                                mainprov.login(email, password,
+                                    (String username){
+                                  // Tandai bahwa login berhasil
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                    content: Text("Selamat datang di bagibagi.id"),
+                                  ));
+                                  // Tampilkan halaman Home dan hapus stack halaman sebelumnya
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => UtamaHome()),
+                                  );
+                                }, (error) {
                                   // Tampilkan notifikasi jika login gagal
+                                  print(error);
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(error),

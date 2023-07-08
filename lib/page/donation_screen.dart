@@ -1,4 +1,5 @@
 import 'package:agile02/page/wd.dart';
+import 'package:agile02/providers/provUtama.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:agile02/providers/donation_model.dart';
@@ -6,6 +7,7 @@ import 'package:agile02/providers/donation_model.dart';
 class DonationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final provUtama = Provider.of<ProvUtama>(context);
     return Center(
       child: Container(
         padding: EdgeInsets.all(6),
@@ -60,7 +62,7 @@ class DonationScreen extends StatelessWidget {
                           child: Container(
                             alignment: Alignment.center,
                             child: Text(
-                              'Rp. ${donation.totalSaldo.toStringAsFixed(3)}',
+                              'Rp. ${provUtama.islogin["totalPendapatan"]}',
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -73,7 +75,7 @@ class DonationScreen extends StatelessWidget {
                           child: Container(
                             alignment: Alignment.center,
                             child: Text(
-                              'Rp. ${donation.danaSekarang.toStringAsFixed(3)}',
+                              'Rp. ${provUtama.islogin["danaSekarang"]}',
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,

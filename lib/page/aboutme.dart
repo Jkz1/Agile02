@@ -1,14 +1,17 @@
 import 'package:agile02/page/donation_screen.dart';
 import 'package:agile02/page/donatur_screen.dart';
+import 'package:agile02/providers/donation_model.dart';
 import 'package:agile02/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
 
 import '../component/aboutmeComp.dart';
+import '../providers/provUtama.dart';
 
 class AboutMe extends StatefulWidget {
-  const AboutMe({super.key});
+  AboutMe({super.key});
 
   @override
   State<AboutMe> createState() => _AboutMeState();
@@ -80,7 +83,15 @@ class _AboutMeState extends State<AboutMe> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    Provider.of<ProvUtama>(context, listen: false).updateTotalPendapatan();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final mainprov = Provider.of<ProvUtama>(context);
+    final dataAkun = mainprov.islogin;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(top: 15),
@@ -122,14 +133,18 @@ class _AboutMeState extends State<AboutMe> {
                     SizedBox(
                       width: 10,
                     ),
-                    Data(),
+                    Data(
+                      email: dataAkun["email"],
+                      username: dataAkun["username"],
+                      nama: dataAkun["nama"],
+                      ),
                   ],
                 ),
                 Row(
                   children: [
                     Text("Bagikan Link Saya :  "),
                     Text(
-                      "bagibagi.id/jokowii",
+                      "bagibagi.id/${dataAkun["username"]}",
                       style: TextStyle(color: Colors.blue),
                     ),
                     SizedBox(
@@ -169,7 +184,14 @@ class _AboutMeState extends State<AboutMe> {
                           ),
                         ],
                       ),
-                      DonaturScreen()
+                      DonaturScreen(),
+                      ElevatedButton(onPressed: (){
+                        Navigator.pop(context);
+                      }, child: Row(
+                        children: [
+                          Icon(Icons.logout)
+                        ],
+                      ))
                     ],
                   ),
                 )

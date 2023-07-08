@@ -1,4 +1,5 @@
 import 'package:agile02/providers/donation_provider.dart';
+import 'package:agile02/providers/provUtama.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -6,16 +7,19 @@ class DonaturScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var donaturProvider = Provider.of<DonationProvider>(context);
+    final riwayatdonatur = Provider.of<ProvUtama>(context).islogin["diterima"];
+    print(riwayatdonatur);
     var donaturHistories = donaturProvider.donaturHistories;
-
     return Center(
       child: Container(
         width: 500,
-        height: 700,
+        height: 500,
         child: ListView.builder(
-          itemCount: donaturHistories.length,
+          itemCount: riwayatdonatur.length,
           itemBuilder: (context, index) {
-            var donatur = donaturHistories[index];
+            var donatur = riwayatdonatur[index];
+            var tgl = donatur["tgl"];
+            String tglString = "${tgl.year}-${tgl.month}-${tgl.day}";
             return Card(
               elevation: 2.0,
               margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
@@ -48,19 +52,19 @@ class DonaturScreen extends StatelessWidget {
                         children: [
                           DonaturInfoRow(
                             label: 'Nama',
-                            value: donatur.name,
+                            value: donatur["pengirim"],
                           ),
                           DonaturInfoRow(
                             label: 'Tanggal',
-                            value: donatur.date,
+                            value: tglString,
                           ),
                           DonaturInfoRow(
                             label: 'Donasi',
-                            value: 'Rp ${donatur.amount.toStringAsFixed(0)}',
+                            value: 'Rp ${donatur["jumlah"]}',
                           ),
                           DonaturInfoRow(
                             label: 'Pesan',
-                            value: donatur.message,
+                            value: donatur["pesan"],
                           ),
                         ],
                       ),
