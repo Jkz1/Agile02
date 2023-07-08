@@ -1,16 +1,17 @@
 import 'package:agile02/page/pay.dart';
+import 'package:agile02/providers/data_provider.dart';
 import 'package:agile02/temp.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:universal_io/io.dart';
 
-//Jika terdapat error, ikuti langkah yang kubuat di readme.md
-
 class About extends StatefulWidget {
-  Map<String, dynamic> data;
-  About({super.key, required this.data});
+  final String username;
+
+  About({Key? key, required this.username}) : super(key: key);
 
   @override
   State<About> createState() => _AboutState();
@@ -18,26 +19,36 @@ class About extends StatefulWidget {
 
 class _AboutState extends State<About> {
   bool isFollowing = false;
+
   @override
   Widget build(BuildContext context) {
+    final dataprovider = Provider.of<DataProvider>(context);
+    final userData = dataprovider.users.firstWhere(
+      (user) => user['username'] == widget.username,
+      orElse: () => {},
+    );
+
+    if (userData.isEmpty) {
+      return Scaffold(
+        body: Center(
+          child: Text('User not found.'),
+        ),
+      );
+    }
+
     openUrl(String urltujuan) async {
       Uri _urlUri = Uri.parse(urltujuan);
       if (kIsWeb) {
         html.window.open(urltujuan, "Youtube");
       } else if (Platform.isAndroid) {
-        if (await canLaunchUrl(_urlUri)) {
-          launchUrl(_urlUri, mode: LaunchMode.externalApplication);
+        if (await canLaunch(_urlUri.toString())) {
+          launch(_urlUri.toString(), forceSafariVC: false);
         }
       } else {
         print("Platform not supported");
       }
     }
 
-    String job = "";
-    for (int i = 0; i < widget.data["job"].length; i++) {
-      job += widget.data["job"][i];
-    }
-    print(job);
     return Template(
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -50,7 +61,7 @@ class _AboutState extends State<About> {
                   backgroundColor: Color(0xff0C5513),
                   radius: 63,
                   child: CircleAvatar(
-                    backgroundImage: AssetImage(widget.data["img"]),
+                    backgroundImage: AssetImage(userData['img_profil'] ?? ''),
                     radius: 60,
                   ),
                 ),
@@ -58,33 +69,35 @@ class _AboutState extends State<About> {
                   height: 4,
                 ),
                 Text(
-                  widget.data["name"],
+                  userData['nama'] ?? '',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 Text(
-                  "@${widget.data["username"]}",
+                  "@${userData['username'] ?? ''}",
                   style: TextStyle(color: Colors.white),
                 ),
                 SizedBox(
                   height: 7,
                 ),
                 Text(
-                  job,
+                  userData['job'] != null ? userData['job'].join(" ") : "",
                   style: TextStyle(color: Colors.white),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     TextButton(
-                        onPressed: () async {
-                          openUrl(widget.data["youtube"]);
-                        },
-                        child: Image.asset("assets/youtube.png")),
+                      onPressed: () async {
+                        openUrl(userData['youtube'] ?? '');
+                      },
+                      child: Image.asset("assets/youtube.png"),
+                    ),
                     TextButton(
-                        onPressed: () async {
-                          openUrl(widget.data["twitch"]);
-                        },
-                        child: Image.asset("assets/twitch.png")),
+                      onPressed: () async {
+                        openUrl(userData['twitch'] ?? '');
+                      },
+                      child: Image.asset("assets/twitch.png"),
+                    ),
                   ],
                 ),
                 SizedBox(
@@ -93,9 +106,10 @@ class _AboutState extends State<About> {
                 Container(
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(color: Color(0xff0C5513))),
+                    color: Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(color: Color(0xff0C5513)),
+                  ),
                   child: Column(
                     children: [
                       Row(
@@ -110,14 +124,16 @@ class _AboutState extends State<About> {
                           Text(
                             "About me!",
                             style: TextStyle(
-                                color: Color(0xff0C5513), fontSize: 23),
+                              color: Color(0xff0C5513),
+                              fontSize: 23,
+                            ),
                           )
                         ],
                       ),
                       SizedBox(
                         height: 10,
                       ),
-                      Text(widget.data["desc"])
+                      Text(userData['desc'] ?? ''),
                     ],
                   ),
                 ),
@@ -127,89 +143,95 @@ class _AboutState extends State<About> {
                 Container(
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(color: Color(0xff0C5513))),
+                    color: Colors.grey.shade200,
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(color: Color(0xff0C5513)),
+                  ),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
-                          child: ElevatedButton(
-                        style: ButtonStyle(
+                        child: ElevatedButton(
+                          style: ButtonStyle(
                             backgroundColor:
                                 MaterialStateProperty.all(Color(0xff22A62F)),
                             shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(18.0)))),
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (_) => Payment()));
-                        },
-                        child: Text("Support Aku Disini!"),
-                      ))
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => Payment(
+                                  usernamePenerima: userData['username'] ?? '',
+                                ),
+                              ),
+                            );
+                          },
+                          child: Text("Support Aku Disini!"),
+                        ),
+                      ),
                     ],
                   ),
                 ),
-                isFollowing
-                    ? SizedBox()
-                    : Container(
-                        child: Column(children: [
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "atau",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                        ]),
-                      ),
-                isFollowing
-                    ? SizedBox() // If user is already following, hide the button
-                    : GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isFollowing = true;
-                          });
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text("Berhasil mengikuti Creator"),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          padding: EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Color(0xff92F090),
-                            borderRadius: BorderRadius.circular(5),
-                            border: Border.all(
-                                color: Color(0xff0C5513), width: 1.5),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                Icons.people,
-                                color: Color(0xff0C5513),
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                "Follow Aku",
-                                style: TextStyle(
-                                  color: Color(0xff0C5513),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
+                if (!isFollowing) ...[
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "atau",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isFollowing = true;
+                      });
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Berhasil mengikuti Creator"),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Color(0xff92F090),
+                        borderRadius: BorderRadius.circular(5),
+                        border: Border.all(
+                          color: Color(0xff0C5513),
+                          width: 1.5,
                         ),
                       ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.people,
+                            color: Color(0xff0C5513),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            "Follow Aku",
+                            style: TextStyle(
+                              color: Color(0xff0C5513),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),

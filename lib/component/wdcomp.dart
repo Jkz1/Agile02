@@ -1,5 +1,6 @@
 import 'package:agile02/home.dart';
 import 'package:agile02/providers/data_provider.dart';
+import 'package:agile02/providers/provUtama.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:agile02/providers/data_provider.dart';
@@ -15,50 +16,42 @@ class WDComp extends StatefulWidget {
 
 class _WDCompState extends State<WDComp> {
   String? metodePenarikan;
+  String? namaBank;
+  String? noRek;
+  String? aN;
   String? jumlahWD;
 
-  Map<String, dynamic> accUser = {
-    "username": 'user1',
-    "acc_bank_id": "AB1",
-    "sisa_saldo": "12000000"
-  };
-
-  TextEditingController textFieldController = TextEditingController();
+  TextEditingController jumlahwd = TextEditingController();
+  TextEditingController namabank = TextEditingController();
+  TextEditingController norek = TextEditingController();
+  TextEditingController an = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<DataProvider>(context);
-
-    final bankData = user.accbank.firstWhere(
-      (bank) => bank['username'] == user.userLogin,
-      orElse: () => {},
-    );
-
-    String bankName = bankData.isNotEmpty ? bankData['nama_bank'] ?? '' : '';
-    String accountNumber = bankData.isNotEmpty ? bankData['norek'] ?? '' : '';
-    String accountOwner =
-        bankData.isNotEmpty ? bankData['nama_pemilik'] ?? '' : '';
+    final user = Provider.of<ProvUtama>(context);
+    var userLogin = user.islogin;
+    String sisaSaldo = userLogin["danaSekarang"].toString();
 
     return SingleChildScrollView(
       child: Container(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         child: Center(
           child: Column(
             children: [
-              SizedBox(height: 70),
+              const SizedBox(height: 10),
               const Text(
                 "Penarikan Dana",
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 50,
+                  fontSize: 25,
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Container(
                 width: MediaQuery.of(context).size.width,
                 child: Card(
                   child: Padding(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -66,9 +59,9 @@ class _WDCompState extends State<WDComp> {
                           "Transfer saldo dari BBPay ke",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Container(
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             border: Border(
                               left: BorderSide(width: 4, color: Colors.green),
                             ),
@@ -79,40 +72,43 @@ class _WDCompState extends State<WDComp> {
                               children: [
                                 Row(
                                   children: [
-                                    Text(bankName.toUpperCase()),
+                                    Expanded(
+                                      child: TextField(
+                                        controller: namabank,
+                                        onChanged: (value) {
+                                          namaBank = value;
+                                        },
+                                        decoration: const InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            hintText: "Nama Bank"),
+                                      ),
+                                    ),
                                     const Text(" - "),
-                                    Text(accountNumber)
+                                    Expanded(
+                                      child: TextField(
+                                        controller: norek,
+                                        onChanged: (value) {
+                                          noRek = value;
+                                        },
+                                        decoration: const InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            hintText: "Nomor Rekening"),
+                                      ),
+                                    ),
                                   ],
                                 ),
-                                SizedBox(height: 5),
+                                const SizedBox(height: 5),
                                 Row(
                                   children: [
-                                    Text(accountOwner.toUpperCase()),
-                                    SizedBox(width: 50),
-                                    GestureDetector(
-                                      onTap: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title: const Text("Informasi"),
-                                              content: const Text(
-                                                  "Maaf, saat ini Ubah Rekening Tujuan dalam perbaikan."),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () {
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                  child: const Text("OK"),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                      },
-                                      child: Text(
-                                        "Ubah Tujuan Penarikan",
-                                        style: TextStyle(color: Colors.red),
+                                    Expanded(
+                                      child: TextField(
+                                        controller: an,
+                                        onChanged: (value) {
+                                          aN = value;
+                                        },
+                                        decoration: const InputDecoration(
+                                            border: OutlineInputBorder(),
+                                            hintText: "Nama Penerima"),
                                       ),
                                     ),
                                   ],
@@ -121,76 +117,80 @@ class _WDCompState extends State<WDComp> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         const Text(
                           "Metode Penarikan",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Expanded(
-                                child: ListTile(
-                              contentPadding: EdgeInsets.all(0),
-                              title: const Text("Antrian"),
-                              leading: Radio(
-                                  value: "antrian",
-                                  groupValue: metodePenarikan,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      metodePenarikan = value;
-                                    });
-                                  }),
-                            )),
-                            Expanded(
-                                child: ListTile(
-                              contentPadding: EdgeInsets.all(0),
-                              title: Row(
-                                children: [
-                                  const Text("Instan"),
-                                  const SizedBox(width: 10),
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 8, vertical: 4),
-                                    decoration: BoxDecoration(
-                                      color: Colors.green,
-                                    ),
-                                    child: const Text(
-                                      "Proses Cepat",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
+                            Row(
+                              children: [
+                                Radio(
+                                    value: "antrian",
+                                    groupValue: metodePenarikan,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        metodePenarikan = value!;
+                                      });
+                                    }),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                const Text("Antrian"),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                Radio(
+                                    value: "instan",
+                                    groupValue: metodePenarikan,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        metodePenarikan = value!;
+                                      });
+                                    }),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                const Text("Instan"),
+                                const SizedBox(
+                                  width: 3,
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  decoration: const BoxDecoration(
+                                    color: Colors.green,
                                   ),
-                                ],
-                              ),
-                              leading: Radio(
-                                  value: "instan",
-                                  groupValue: metodePenarikan,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      metodePenarikan = value;
-                                    });
-                                  }),
-                            ))
+                                  child: const Text(
+                                    "Proses Cepat",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         const Text(
                           "Saldo kamu",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Row(
                           children: [
                             Text(
-                              "Rp. ${NumberFormat('#,##0').format(int.parse(accUser['sisa_saldo']))}",
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              "Rp. ${NumberFormat('#,##0').format(int.parse(sisaSaldo))}",
+                              style: const TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             GestureDetector(
                               onTap: () {
                                 setState(() {
-                                  jumlahWD = accUser['sisa_saldo'].toString();
-                                  textFieldController.text =
-                                      '${accUser['sisa_saldo']}';
+                                  jumlahWD = sisaSaldo.toString();
+                                  jumlahwd.text = '$sisaSaldo';
                                 });
                               },
                               child: const Text(
@@ -200,42 +200,47 @@ class _WDCompState extends State<WDComp> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         const Text(
                           "Jumlah Penarikan",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: 5),
-                        const Text(
-                          "Minimal: Rp. 10,000 | Maksimal Rp. 100,000,000",
-                          style: TextStyle(
+                        const SizedBox(height: 5),
+                        Text(
+                          "Minimal: Rp. 10,000 | Maksimal Rp.${NumberFormat('#,##0').format(int.parse(sisaSaldo))}",
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 12),
                         ),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         TextField(
-                          controller: textFieldController,
+                          controller: jumlahwd,
                           onChanged: (value) {
                             jumlahWD = value;
                           },
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                           ),
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             ElevatedButton(
                               onPressed: () {
-                                if (metodePenarikan != null &&
-                                    jumlahWD != null) {
-                                  user.tarikSaldo(user.userLogin, 'AB1',
-                                      metodePenarikan!, jumlahWD!);
-                                  metodePenarikan = null;
-                                  textFieldController.clear();
+                                if (metodePenarikan != null && jumlahwd.text != "" && jumlahwd.text != "0" && int.parse(jumlahwd.text) <= userLogin["danaSekarang"] && norek.text != "" && namabank.text != "" && an.text != "") {
+                                  print("Ter isi semua");
+                                  // user.tarikSaldo(
+                                  //     user.userLogin,
+                                  //     metodePenarikan!,
+                                  //     jumlahWD!,
+                                  //     namaBank!,
+                                  //     noRek!,
+                                  //     aN!);
+                                  // metodePenarikan = null;
+                                  // jumlahwd.clear();
                                 } else {
                                   ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
+                                      .showSnackBar(const SnackBar(
                                     content: Text("Kesalahan pengisian"),
                                     duration: Duration(milliseconds: 600),
                                   ));
@@ -243,7 +248,7 @@ class _WDCompState extends State<WDComp> {
                               },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.green),
-                              child: Text('Tarik Saldo'),
+                              child: const Text('Tarik Saldo'),
                             ),
                           ],
                         ),
@@ -252,37 +257,37 @@ class _WDCompState extends State<WDComp> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
                 child: Card(
                   child: Padding(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("List Penarikan Dana"),
-                        SizedBox(height: 10),
+                        const Text("List Penarikan Dana"),
+                        const SizedBox(height: 10),
                         Center(
                           child: Table(
-                            columnWidths: {
+                            columnWidths: const {
                               // 0: FractionColumnWidth(0.2),
-                              0: FractionColumnWidth(0.2),
-                              1: FractionColumnWidth(0.2),
-                              2: FractionColumnWidth(0.2),
-                              3: FractionColumnWidth(0.2),
+                              0: FractionColumnWidth(0.25),
+                              1: FractionColumnWidth(0.25),
+                              2: FractionColumnWidth(0.25),
+                              3: FractionColumnWidth(0.25),
                             },
                             border: TableBorder.all(color: Colors.grey),
                             children: [
-                              TableRow(
+                              const TableRow(
                                 children: [
                                   TableCell(
                                     child: Padding(
                                       padding: EdgeInsets.all(8),
                                       child: Text(
-                                        'Acc Bank ID',
+                                        'Acc Bank ',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
@@ -320,55 +325,37 @@ class _WDCompState extends State<WDComp> {
                                   ),
                                 ],
                               ),
-                              ...user.listWD
-                                  .where(
-                                      (wd) => wd['username'] == user.userLogin)
-                                  .map((wd) {
-                                String jumlahPenarikan =
-                                    'Rp. ${wd['jumlah_penarikan'] ?? ''}';
-                                String statusPenarikan = '';
-                                if (wd['status_penarikan'] == '0') {
-                                  statusPenarikan = 'Proses';
-                                } else if (wd['status_penarikan'] == '1') {
-                                  statusPenarikan = 'Sukses';
-                                }
-                                return TableRow(
+                              for (var wd in userLogin["penarikan"]) TableRow(
                                   children: [
                                     TableCell(
                                       child: Padding(
-                                        padding: EdgeInsets.all(8),
+                                        padding: const EdgeInsets.all(8),
                                         child: Text(
-                                          bankData['acc_bank_id'] ==
-                                                      user.userAccbankID &&
-                                                  bankData['username'] ==
-                                                      user.userLogin
-                                              ? '${bankData['nama_bank']} - ${bankData['norek']}'
-                                              : '',
-                                        ),
+                                            '${wd['namaBank'] ?? '-'} - ${wd['noRek'] ?? ''}'),
                                       ),
                                     ),
                                     TableCell(
                                       child: Padding(
-                                        padding: EdgeInsets.all(8),
+                                        padding: const EdgeInsets.all(8),
                                         child:
-                                            Text(wd['metode_penarikan'] ?? ''),
+                                            Text(wd['metode'] ?? ''),
                                       ),
                                     ),
                                     TableCell(
                                       child: Padding(
-                                        padding: EdgeInsets.all(8),
-                                        child: Text(jumlahPenarikan),
+                                        padding: const EdgeInsets.all(8),
+                                        child: Text(wd["jumlah"].toString()),
                                       ),
                                     ),
                                     TableCell(
                                       child: Padding(
-                                        padding: EdgeInsets.all(8),
-                                        child: Text(statusPenarikan),
+                                        padding: const EdgeInsets.all(8),
+                                        child: Text(wd["status"]),
                                       ),
                                     ),
                                   ],
-                                );
-                              }).toList(),
+                                )
+                                
                             ],
                           ),
                         ),

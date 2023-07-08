@@ -1,15 +1,17 @@
 import 'package:agile02/providers/donation_provider.dart';
 import 'package:agile02/providers/provUtama.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:agile02/providers/data_provider.dart';
 
 class DonaturScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var donaturProvider = Provider.of<DonationProvider>(context);
-    final riwayatdonatur = Provider.of<ProvUtama>(context).islogin["diterima"];
-    print(riwayatdonatur);
-    var donaturHistories = donaturProvider.donaturHistories;
+    var mainProv = Provider.of<ProvUtama>(context);
+    var userLogin = mainProv.islogin;
+    var riwayatdonatur = userLogin["diterima"];
+
     return Center(
       child: Container(
         width: 500,
@@ -28,49 +30,34 @@ class DonaturScreen extends StatelessWidget {
                 side: BorderSide(color: Colors.black, width: 1.0),
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: SizedBox(
-                      width: 80.0,
-                      height: 80.0,
-                      child: CircleAvatar(
-                        backgroundImage: AssetImage('assets/jokowi.jpg'),
-                      ),
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    DonaturInfoRow(
+                      label: 'Nama Pengirim',
+                      value: donatur['pengirim'],
                     ),
-                  ),
-                  Container(
-                    width: 1.0,
-                    color: Colors.black,
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          DonaturInfoRow(
-                            label: 'Nama',
-                            value: donatur["pengirim"],
-                          ),
-                          DonaturInfoRow(
-                            label: 'Tanggal',
-                            value: tglString,
-                          ),
-                          DonaturInfoRow(
-                            label: 'Donasi',
-                            value: 'Rp ${donatur["jumlah"]}',
-                          ),
-                          DonaturInfoRow(
-                            label: 'Pesan',
-                            value: donatur["pesan"],
-                          ),
-                        ],
-                      ),
+                    DonaturInfoRow(
+                      label: 'Email Pengirim',
+                      value: donatur['email'],
                     ),
-                  ),
-                ],
+                    DonaturInfoRow(
+                      label: 'Tanggal',
+                      value: tglString,
+                    ),
+                    DonaturInfoRow(
+                      label: 'Jumlah Diterima',
+                      value:
+                          'Rp. ${NumberFormat.currency(locale: 'id_ID', symbol: '').format(donatur['jumlah'])}',
+                    ),
+                    DonaturInfoRow(
+                      label: 'Pesan',
+                      value: donatur['pesan'],
+                    ),
+                  ],
+                ),
               ),
             );
           },
@@ -94,19 +81,19 @@ class DonaturInfoRow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: 80,
+            width: 120,
             child: Text(
-              '$label',
+              '$label:',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           SizedBox(width: 8.0),
           Expanded(
-              child: Text(
-            ': $value',
-            style: TextStyle(
-                color: label == "Donasi" ? Color(0xff0C5513) : Colors.black),
-          )),
+            child: Text(
+              value,
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
         ],
       ),
     );

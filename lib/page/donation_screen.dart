@@ -3,6 +3,9 @@ import 'package:agile02/providers/provUtama.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:agile02/providers/donation_model.dart';
+import 'package:agile02/providers/data_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class DonationScreen extends StatelessWidget {
   @override
@@ -62,7 +65,7 @@ class DonationScreen extends StatelessWidget {
                           child: Container(
                             alignment: Alignment.center,
                             child: Text(
-                              'Rp. ${provUtama.islogin["totalPendapatan"]}',
+                              'Rp. ${NumberFormat.currency(locale: 'id_ID', symbol: '').format(provUtama.islogin["totalPendapatan"])}',
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -75,7 +78,7 @@ class DonationScreen extends StatelessWidget {
                           child: Container(
                             alignment: Alignment.center,
                             child: Text(
-                              'Rp. ${provUtama.islogin["danaSekarang"]}',
+                              'Rp. ${NumberFormat.currency(locale: 'id_ID', symbol: '').format(provUtama.islogin["danaSekarang"])}',
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,

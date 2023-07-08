@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 class ProvUtama extends ChangeNotifier {
   dynamic _islogin = "";
 
+  int? indexlogin;
+
   dynamic _daftarakun = [
     {
       "username": "JokotiHD",
@@ -17,163 +19,10 @@ class ProvUtama extends ChangeNotifier {
       "penarikan": [
         {
           "id": "218651",
+          "status" : "Proses",
           "jumlah": 10000,
           "tgl": DateTime(2023, 3, 1),
-          "tujuan": "bank02",
-          "metode": "antrian",
-          "noRek": "019285123"
-        },
-      ],
-      "diterima": [
-        {
-          "id": "19203",
-          "pengirim": "Megawati",
-          "tgl": DateTime(2023, 3, 1),
-          "jumlah": 10000,
-          "email": "megawati@gmail.com",
-          "metode": "Qris-shoppepay",
-          "pesan": "Semangat",
-        },
-        {
-          "id": "19302",
-          "pengirim": "Soekarno",
-          "tgl": DateTime(2023, 3, 1),
-          "jumlah": 20000,
-          "email": "soekarno@gmail.com",
-          "metode": "Qris-shoppepay",
-          "pesan": "Main Only Up bang",
-        },
-        {
-          "id": "12203",
-          "pengirim": "Soeharto",
-          "tgl": DateTime(2023, 3, 1),
-          "jumlah": 41200,
-          "email": "soeharto@gmail.com",
-          "metode": "Qris-shoppepay",
-          "pesan": "Main em el bang",
-        },
-      ],
-      "dikirim": [
-        {
-          "id": "19203",
-          "tgl": DateTime(2023, 3, 1),
-          "penerima": "Megawati",
-          "jumlah": 10000,
-          "email": "megawati@gmail.com",
-          "metode": "Qris-shoppepay",
-          "pesan": "Semangat",
-        },
-        {
-          "id": "19302",
-          "tgl": DateTime(2023, 3, 1),
-          "penerima": "Soekarno",
-          "jumlah": 20000,
-          "email": "soekarno@gmail.com",
-          "metode": "Qris-shoppepay",
-          "pesan": "Main Only Up bang",
-        },
-        {
-          "id": "12203",
-          "tgl": DateTime(2023, 3, 1),
-          "penerima": "Soeharto",
-          "jumlah": 41200,
-          "email": "soeharto@gmail.com",
-          "metode": "Qris-shoppepay",
-          "pesan": "Main em el bang",
-        },
-      ]
-    },
-    {
-      "username": "MegawadiHD",
-      "nama": "Mega",
-      "email": "qwe",
-      "tanggal_lahir": DateTime(2003, 3, 14),
-      "password": "qwe",
-      "totalPendapatan" : 0,
-      "danaSekarang" : 0,
-      "penarikan": [
-        {
-          "id": "218651",
-          "jumlah": 10000,
-          "tgl": DateTime(2023, 3, 1),
-          "tujuan": "bank02",
-          "metode": "antrian",
-          "noRek": "019285123"
-        },
-      ],
-      "diterima": [
-        {
-          "id": "19203",
-          "pengirim": "Megawati",
-          "tgl": DateTime(2023, 3, 1),
-          "jumlah": 10000,
-          "email": "megawati@gmail.com",
-          "metode": "Qris-shoppepay",
-          "pesan": "Semangat",
-        },
-        {
-          "id": "19302",
-          "pengirim": "Soekarno",
-          "tgl": DateTime(2023, 3, 1),
-          "jumlah": 20000,
-          "email": "soekarno@gmail.com",
-          "metode": "Qris-shoppepay",
-          "pesan": "Main Only Up bang",
-        },
-        {
-          "id": "12203",
-          "pengirim": "Soeharto",
-          "tgl": DateTime(2023, 3, 1),
-          "jumlah": 41200,
-          "email": "soeharto@gmail.com",
-          "metode": "Qris-shoppepay",
-          "pesan": "Main em el bang",
-        },
-      ],
-      "dikirim": [
-        {
-          "id": "19203",
-          "tgl": DateTime(2023, 3, 1),
-          "penerima": "Megawati",
-          "jumlah": 10000,
-          "email": "megawati@gmail.com",
-          "metode": "Qris-shoppepay",
-          "pesan": "Semangat",
-        },
-        {
-          "id": "19302",
-          "tgl": DateTime(2023, 3, 1),
-          "penerima": "Soekarno",
-          "jumlah": 20000,
-          "email": "soekarno@gmail.com",
-          "metode": "Qris-shoppepay",
-          "pesan": "Main Only Up bang",
-        },
-        {
-          "id": "12203",
-          "tgl": DateTime(2023, 3, 1),
-          "penerima": "Soeharto",
-          "jumlah": 41200,
-          "email": "soeharto@gmail.com",
-          "metode": "Qris-shoppepay",
-          "pesan": "Main em el bang",
-        },
-      ]
-    },
-    {
-      "username": "Soeharno",
-      "nama": "Har",
-      "email": "zxc",
-      "tanggal_lahir": DateTime(2003, 3, 14),
-      "password": "zxc",
-      "totalPendapatan" : 0,
-      "danaSekarang" : 0,
-      "penarikan": [
-        {
-          "id": "218651",
-          "jumlah": 10000,
-          "tgl": DateTime(2023, 3, 1),
-          "tujuan": "bank02",
+          "namaBank": "Central Asia",
           "metode": "antrian",
           "noRek": "019285123"
         },
@@ -267,11 +116,12 @@ class ProvUtama extends ChangeNotifier {
       Function(String) onError) {
     bool isLoginSuccessful = false;
     dynamic _userlogin = '';
-    for (var user in _daftarakun) {
-      if ((user['email'].toLowerCase() == email.toLowerCase()) &&
-          (user['password'] == password)) {
+    for (int i = 0; i < _daftarakun.length; i++) {
+      if ((_daftarakun[i]['email'].toLowerCase() == email.toLowerCase()) &&
+          (_daftarakun[i]['password'] == password)) {
         isLoginSuccessful = true;
-        _islogin = user;
+        _islogin = _daftarakun[i];
+        indexlogin = i;
         break;
       }
     }
@@ -298,9 +148,25 @@ class ProvUtama extends ChangeNotifier {
       "email": email,
       "tanggal_lahir": tanggal_lahir,
       "password": password,
+      "totalPendapatan" : 0,
+      "danaSekarang" : 0,
       "penarikan": [],
       "diterima": [],
       "dikirim": []
     });
   }
+
+  void transaksi(
+    // {
+    //       "id": "218651",
+    //       "status" : "Proses",
+    //       "jumlah": 10000,
+    //       "tgl": DateTime(2023, 3, 1),
+    //       "namaBank": "Central Asia",
+    //       "metode": "antrian",
+    //       "noRek": "019285123"
+    //     },
+    String metode
+  )
+
 }

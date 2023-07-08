@@ -1,5 +1,6 @@
 import 'package:agile02/MainHome.dart';
 import 'package:agile02/home.dart';
+import 'package:agile02/page/pay.dart';
 import 'package:agile02/page/payment_option_box.dart';
 import 'package:agile02/page/wd.dart';
 import 'package:agile02/providers/about_akun.dart';
@@ -55,7 +56,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Color(0xff3E6C29),
           primarySwatch: Colors.blue,
         ),
-        home: Home()
+        home: MainHome(),
       ),
     );
   }

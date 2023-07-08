@@ -110,64 +110,43 @@ class _AboutMeState extends State<AboutMe> {
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(color: Color(0xff0C5513))),
               child: Column(children: [
-                Row(
-                  children: [
-                    Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 67,
-                          backgroundColor: Color(0xff0C5513),
-                          child: CircleAvatar(
-                            radius: 65,
-                            backgroundImage: AssetImage('assets/jokowi.jpg'),
-                          ),
-                        ),
-                        TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              "edit foto",
-                              style: TextStyle(color: Colors.red),
-                            ))
-                      ],
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Data(
+                Data(
                       email: dataAkun["email"],
                       username: dataAkun["username"],
                       nama: dataAkun["nama"],
                       ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text("Bagikan Link Saya :  "),
-                    Text(
-                      "bagibagi.id/${dataAkun["username"]}",
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        _showShareBottomSheet();
-                      },
-                      child: Icon(
-                        Icons.share,
-                        color: Colors.blue,
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      Text("Bagikan Link Saya :  "),
+                      Text(
+                        "bagibagi.id/${dataAkun["username"]}",
+                        style: TextStyle(color: Colors.blue),
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: 5,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          _showShareBottomSheet();
+                        },
+                        child: Icon(
+                          Icons.share,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                // DonationScreen(),
                 SizedBox(
                   height: 10,
                 ),
                 DonationScreen(),
-                SizedBox(
-                  height: 10,
-                ),
                 Container(
                   decoration: BoxDecoration(color: Color(0xffD9D9D9)),
                   child: Column(
@@ -185,13 +164,6 @@ class _AboutMeState extends State<AboutMe> {
                         ],
                       ),
                       DonaturScreen(),
-                      ElevatedButton(onPressed: (){
-                        Navigator.pop(context);
-                      }, child: Row(
-                        children: [
-                          Icon(Icons.logout)
-                        ],
-                      ))
                     ],
                   ),
                 )
