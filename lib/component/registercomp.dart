@@ -228,6 +228,10 @@ class _RegisterCompState extends State<RegisterComp> {
                                   email.text,
                                   tglLahir!,
                                   password.text);
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                duration: Duration(milliseconds: 800),
+                                content: Text("Berhasil menambahkan akun"),
+                              ));
                               Navigator.pop(context);
                             } else {
                               ScaffoldMessenger.of(context)

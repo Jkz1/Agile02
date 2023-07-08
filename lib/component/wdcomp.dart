@@ -207,7 +207,7 @@ class _WDCompState extends State<WDComp> {
                         ),
                         const SizedBox(height: 5),
                         Text(
-                          "Minimal: Rp. 10,000 | Maksimal Rp.${NumberFormat('#,##0').format(int.parse(sisaSaldo))}",
+                          "Minimal: Rp. 1 | Maksimal Rp.${NumberFormat('#,##0').format(int.parse(sisaSaldo))}",
                           style: const TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 12),
                         ),
@@ -228,7 +228,7 @@ class _WDCompState extends State<WDComp> {
                             ElevatedButton(
                               onPressed: () {
                                 if (metodePenarikan != null && jumlahwd.text != "" && jumlahwd.text != "0" && int.parse(jumlahwd.text) <= userLogin["danaSekarang"] && norek.text != "" && namabank.text != "" && an.text != "") {
-                                  user.transaksi(metodePenarikan!, noRek!, namaBank!, jumlahwd.text);
+                                  user.transaksi(metodePenarikan!, norek.text, namabank.text, jumlahwd.text);
                                   Navigator.pop(context);
                                 } else {
                                   ScaffoldMessenger.of(context)

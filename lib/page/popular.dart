@@ -20,11 +20,6 @@ class _PopularState extends State<Popular> {
   @override
   Widget build(BuildContext context) {
     final mainprov = Provider.of<ProvUtama>(context);
-
-    List<Map<String,dynamic>> sortedakun = mainprov.daftarakun;
-    sortedakun.sort((b,a) => a["totalPendapatan"].compareTo(b["totalPendapatan"]));
-
-
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Center(
@@ -98,25 +93,31 @@ class _PopularState extends State<Popular> {
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
                             ),
-                            title: 
-                                Text(
-                                  mainprov.daftarakun[index]["nama"],
-                                  style:
-                                      TextStyle(color: Colors.white, fontSize: 20),
-                                ),
-                            subtitle: Column(
+                            title: Row(
                               children: [
-                                Text(
-                                  "RP. ${NumberFormat.currency(locale: 'id_ID', symbol: '').format(sortedakun[index]["totalPendapatan"])}",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 15),
+                                CircleAvatar(
+                                  radius: 25,
+                                  backgroundColor: Color(0xff0C5513),
+                                  child: CircleAvatar(
+                                    radius: 24,
+                                    backgroundImage: AssetImage(
+                                        mainprov.daftarakun[index]["img"]),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
                                 ),
                                 Text(
-                                  "all the time",
+                                  mainprov.sortedakun[index]["nama"],
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 12),
-                                )
+                                      color: Colors.white, fontSize: 20),
+                                ),
                               ],
+                            ),
+                            subtitle: Text(
+                              "RP. ${NumberFormat.currency(locale: 'id_ID', symbol: '').format(mainprov.sortedakun[index]["totalPendapatan"])}",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 20),
                             ),
                           ),
                         )),

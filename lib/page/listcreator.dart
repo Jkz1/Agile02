@@ -25,6 +25,8 @@ class _ListaccState extends State<Listacc> {
   void initState() {
     super.initState();
     _filteredCards = Provider.of<DataProvider>(context, listen: false).users;
+    Provider.of<ProvUtama>(context, listen: false).updateTotalPendapatan();
+    Provider.of<ProvUtama>(context, listen: false).earlyAll();
   }
 
   @override

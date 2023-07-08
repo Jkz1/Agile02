@@ -29,6 +29,8 @@ class Data extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var users = Provider.of<ProvUtama>(context);
+    var userLogin = users.islogin;
     return Row(
       children: [
         Column(
@@ -38,15 +40,38 @@ class Data extends StatelessWidget {
               backgroundColor: Color(0xff0C5513),
               child: CircleAvatar(
                 radius: 65,
-                backgroundImage: AssetImage('assets/jokowi.jpg'),
+                backgroundImage: AssetImage(userLogin['img'] ?? ''),
               ),
             ),
             TextButton(
-                onPressed: () {},
+              onPressed: () {},
+              child: GestureDetector(
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Informasi"),
+                        content: const Text(
+                            "Maaf, saat ini Ubah Foto dalam pengembangan."),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text("OK"),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
                 child: Text(
                   "edit foto",
                   style: TextStyle(color: Colors.red),
-                ))
+                ),
+              ),
+            )
           ],
         ),
         SizedBox(
@@ -77,11 +102,34 @@ class Data extends StatelessWidget {
                 ),
               ),
               TextButton(
-                  onPressed: () {},
+                onPressed: () {},
+                child: GestureDetector(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text("Informasi"),
+                          content: const Text(
+                              "Maaf, saat ini Ubah Data dalam pengembangan."),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("OK"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
                   child: Text(
-                    "edit foto",
+                    "edit data",
                     style: TextStyle(color: Colors.red),
-                  ))
+                  ),
+                ),
+              )
             ],
           ),
         ),

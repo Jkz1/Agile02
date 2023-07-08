@@ -68,11 +68,12 @@ class _UtamaHomeState extends State<UtamaHome> {
                         MaterialPageRoute(builder: (_) => UtamaHome()));
                   } else if (value == "logout"){
                     logout()async{
-                      await Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => MainHome()),
-                        (route) => false,
-                      );
+                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (_) => MainHome()));
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text("Berhasil LogOut"),
+                        duration: Duration(milliseconds: 900),
+                      ));
                       setState(() {
                         user.setislogin = "";
                         pageprov.setselectedPage = 0;

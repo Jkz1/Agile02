@@ -22,10 +22,12 @@ class _MainHomeState extends State<MainHome> {
   void initState() {
     super.initState();
     Provider.of<ProvUtama>(context, listen: false).updateTotalPendapatan();
+    Provider.of<ProvUtama>(context, listen: false).earlyAll();
   }
 
   @override
   Widget build(BuildContext context) {
+    final mainprov = Provider.of<ProvUtama>(context);
     var berbagi;
     return Template(
       child: SingleChildScrollView(
@@ -36,8 +38,8 @@ class _MainHomeState extends State<MainHome> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  GestureDetector(
-                    onTap: () {
+                  InkWell(
+                    onTap: (){
                       Navigator.push(
                           context,
                           MaterialPageRoute(

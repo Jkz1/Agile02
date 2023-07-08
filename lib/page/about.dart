@@ -1,3 +1,4 @@
+import 'package:agile02/page/login.dart';
 import 'package:agile02/page/pay.dart';
 import 'package:agile02/providers/data_provider.dart';
 import 'package:agile02/temp.dart';
@@ -25,12 +26,19 @@ class _AboutState extends State<About> {
   @override
   Widget build(BuildContext context) {
     final dataprovider = Provider.of<ProvUtama>(context);
-    final userData = dataprovider.islogin;
+
+    dynamic userData;
+
+    for(var dat in dataprovider.daftarakun){
+      if(dat["username"] == widget.username){
+        userData = dat;
+      }
+    }
 
     openUrl(String urltujuan) async {
       Uri _urlUri = Uri.parse(urltujuan);
       if (kIsWeb) {
-        html.window.open(urltujuan, "Youtube");
+        html.window.open(urltujuan, "Sosial Media");
       } else if (Platform.isAndroid) {
         if (await canLaunch(_urlUri.toString())) {
           launch(_urlUri.toString(), forceSafariVC: false);
@@ -75,13 +83,13 @@ class _AboutState extends State<About> {
                   children: [
                     TextButton(
                       onPressed: () async {
-                        openUrl(userData['youtube'] ?? '');
+                        openUrl(userData['youtube'] ?? 'https://www.youtube.com/@VALORANTEsportsIndonesia');
                       },
                       child: Image.asset("assets/youtube.png"),
                     ),
                     TextButton(
                       onPressed: () async {
-                        openUrl(userData['twitch'] ?? '');
+                        openUrl(userData['twitch'] ?? 'https://www.twitch.tv/tarik');
                       },
                       child: Image.asset("assets/twitch.png"),
                     ),
@@ -150,14 +158,20 @@ class _AboutState extends State<About> {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => Payment(
-                                  usernamePenerima: userData['username'] ?? '',
+                            if(dataprovider.islogin == ""){
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Perlu login untuk melanjutkan"), duration: Duration(milliseconds: 1000),));
+                              Navigator.pop(context);
+                              Navigator.push(context, MaterialPageRoute(builder: (_) => Login()));
+                            }else{
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => Payment(
+                                    usernamePenerima: userData['username'],
+                                  ),
                                 ),
-                              ),
-                            );
+                              );
+                            }
                           },
                           child: Text("Support Aku Disini!"),
                         ),
@@ -178,14 +192,27 @@ class _AboutState extends State<About> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      setState(() {
-                        isFollowing = true;
-                      });
-                      ScaffoldMessenger.of(context).showSnackBar(
+                      if(dataprovider.islogin == ""){
+                        ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text("Berhasil mengikuti Creator"),
+                          content: Text("Diharuskan untuk login"),
+                          duration: Duration(milliseconds: 800),
                         ),
                       );
+                      Navigator.pop(context);
+                        Navigator.push(context, MaterialPageRoute(builder: (_) => Login()));
+                      }
+                      else{
+                        setState(() {
+                          isFollowing = true;
+                        });
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Berhasil mengikuti Creator"),
+                            duration: Duration(milliseconds: 800),
+                          ),
+                        );
+                      }
                     },
                     child: Container(
                       padding: EdgeInsets.all(8),

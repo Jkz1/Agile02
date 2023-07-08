@@ -1,6 +1,7 @@
 import 'package:agile02/MainHome.dart';
 import 'package:agile02/page/payment_option_box.dart';
 import 'package:agile02/providers/pageProv.dart';
+import 'package:agile02/providers/provUtama.dart';
 import 'package:agile02/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -28,16 +29,21 @@ class _PaymentState extends State<Payment> {
   TextEditingController pesan_pengirim = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final mainProv = Provider.of<DataProvider>(context);
+    final mainProv = Provider.of<ProvUtama>(context);
     final paymentOpt = Provider.of<PaymentOptProv>(context);
     final pageprov = Provider.of<PageProv>(context);
     String? usernamePenerima = widget.usernamePenerima;
 
-    final user = mainProv.users.firstWhere(
-        (user) => user['username'] == usernamePenerima,
-        orElse: () => {});
+    var user;
+
+    for (var i in mainProv.daftarakun){
+      if(i["username"] == usernamePenerima){
+        user = i;
+      }
+    }
+
     final String nama = user['nama'] ?? '';
-    final String imgProfil = user['img_profil'] ?? '';
+    final String imgProfil = user['img'] ?? '';
     return Template(
       child: SingleChildScrollView(
         child: Padding(
@@ -173,11 +179,12 @@ class _PaymentState extends State<Payment> {
                               onPressed: () {
                                 mainProv.donate(
                                     usernamePenerima,
-                                    mainProv.userLogin,
+                                    mainProv.islogin["username"],
                                     nominal_pengirim.text,
                                     nama_pengirim.text,
                                     email_pengirim.text,
-                                    pesan_pengirim.text);
+                                    pesan_pengirim.text,
+                                    paymentOpt.getSelectedPaymentOption());
 
                                 // Membuat showDialog dengan detail donasi
                                 showDialog(

@@ -98,6 +98,7 @@ class LoginComp extends StatelessWidget {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(SnackBar(
                                     content: Text("Selamat datang di bagibagi.id"),
+                                    duration: Duration(milliseconds: 900),
                                   ));
                                   // Tampilkan halaman Home dan hapus stack halaman sebelumnya
                                   Navigator.push(

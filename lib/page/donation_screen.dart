@@ -95,7 +95,8 @@ class DonationScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
+              onPressed: provUtama.islogin["danaSekarang"] != 0
+              ?() {
                 // Handle penarikan dana
                 Navigator.push(
                   context,
@@ -103,7 +104,7 @@ class DonationScreen extends StatelessWidget {
                     builder: (context) => WD(),
                   ),
                 );
-              },
+              } : null,
               style: ElevatedButton.styleFrom(
                 primary: Color(0xFF30A92D),
               ),

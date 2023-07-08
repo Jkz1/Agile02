@@ -1,17 +1,22 @@
 // ignore_for_file: unnecessary_question_mark
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 
 class ProvUtama extends ChangeNotifier {
   dynamic _islogin = "";
 
+  List<bool> _timeOpt = [false, false, true];
+
   int? indexlogin;
 
   dynamic _daftarakun = [
     {
+      "desc":
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       "username": "JokotiHD",
-      "img" : "assets/PP/1.jpg",
+      "img": "assets/PP/1.jpg",
       "nama": "Joko",
       "email": "asd",
       "tanggal_lahir": DateTime(2003, 3, 14),
@@ -95,8 +100,10 @@ class ProvUtama extends ChangeNotifier {
       ]
     },
     {
+      "desc":
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       "username": "User2",
-      "img" : "assets/PP/8.jpg",
+      "img": "assets/PP/8.jpg",
       "nama": "Jane Smith",
       "email": "abc123",
       "tanggal_lahir": DateTime(1985, 10, 12),
@@ -155,8 +162,10 @@ class ProvUtama extends ChangeNotifier {
       "dikirim": []
     },
     {
+      "desc":
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       "username": "User3",
-      "img" : "assets/PP/6.jpg",
+      "img": "assets/PP/6.jpg",
       "nama": "Michael Johnson",
       "email": "passw0rd",
       "tanggal_lahir": DateTime(1988, 7, 8),
@@ -248,8 +257,10 @@ class ProvUtama extends ChangeNotifier {
       ]
     },
     {
+      "desc":
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       "username": "User4",
-      "img" : "assets/PP/8.jpg",
+      "img": "assets/PP/8.jpg",
       "nama": "Emily Brown",
       "email": "qwerty123",
       "tanggal_lahir": DateTime(1992, 12, 31),
@@ -299,8 +310,10 @@ class ProvUtama extends ChangeNotifier {
       "dikirim": []
     },
     {
+      "desc":
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       "username": "User5",
-      "img" : "assets/PP/3.jpg",
+      "img": "assets/PP/3.jpg",
       "nama": "David Wilson",
       "email": "p@ssw0rd",
       "tanggal_lahir": DateTime(1995, 3, 19),
@@ -331,8 +344,10 @@ class ProvUtama extends ChangeNotifier {
       "dikirim": []
     },
     {
+      "desc":
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       "username": "User6",
-      "img" : "assets/PP/9.jpg",
+      "img": "assets/PP/9.jpg",
       "nama": "Sarah Davis",
       "email": "password1",
       "tanggal_lahir": DateTime(1987, 9, 2),
@@ -379,8 +394,10 @@ class ProvUtama extends ChangeNotifier {
       "dikirim": []
     },
     {
+      "desc":
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       "username": "User7",
-      "img" : "assets/PP/2.jpg",
+      "img": "assets/PP/2.jpg",
       "nama": "Daniel Martinez",
       "email": "abcd1234",
       "tanggal_lahir": DateTime(1991, 6, 15),
@@ -420,8 +437,10 @@ class ProvUtama extends ChangeNotifier {
       ]
     },
     {
+      "desc":
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       "username": "User8",
-      "img" : "assets/PP/2.jpg",
+      "img": "assets/PP/2.jpg",
       "nama": "Olivia Taylor",
       "email": "q1w2e3r4",
       "tanggal_lahir": DateTime(1993, 11, 7),
@@ -513,7 +532,9 @@ class ProvUtama extends ChangeNotifier {
       "dikirim": []
     },
     {
-      "img" : "assets/PP/6.jpg",
+      "img": "assets/PP/6.jpg",
+      "desc":
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       "username": "User9",
       "nama": "James Anderson",
       "email": "pass1234",
@@ -618,8 +639,10 @@ class ProvUtama extends ChangeNotifier {
       ]
     },
     {
+      "desc":
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       "username": "User10",
-      "img" : "assets/PP/4.jpg",
+      "img": "assets/PP/4.jpg",
       "nama": "Emma Johnson",
       "email": "qwertyui",
       "tanggal_lahir": DateTime(1994, 8, 11),
@@ -659,9 +682,80 @@ class ProvUtama extends ChangeNotifier {
 
   dynamic get islogin => _islogin;
   dynamic get daftarakun => _daftarakun;
+  List<bool> get timeOpt => _timeOpt;
 
   set setislogin(val) {
     _islogin = val;
+    notifyListeners();
+  }
+
+
+  void changeOption(int idx) {
+    for (int i = 0; i < _timeOpt.length; i++) {
+      if (i == idx) {
+        _timeOpt[i] = true;
+      } else {
+        _timeOpt[i] = false;
+      }
+    }
+    notifyListeners();
+  }
+
+  void donate(
+      String usernamePenerima,
+      String usernamePengirim,
+      String nominalpengirim,
+      String namaPengirim,
+      String emailPengirim,
+      String pesanPengirim,
+      String metode) {
+    DateTime currentDate = DateTime.now();
+    var uuid = Uuid();
+    int nominalPengirim = int.parse(nominalpengirim);
+    Map<String, dynamic> newDiterima = {
+      "id": uuid.v1(),
+      "pengirim": namaPengirim,
+      "email": emailPengirim,
+      "tgl": currentDate,
+      "jumlah": nominalPengirim,
+      "pesan": pesanPengirim,
+      "metode": metode
+    };
+
+    Map<String, dynamic> newDikirim = {
+      "id": uuid.v1(),
+      "penerima": namaPengirim,
+      "tgl": currentDate,
+      "jumlah": nominalPengirim,
+      "pesan": pesanPengirim,
+      "metode": metode
+    };
+    // Cari pengguna dengan username pengirim
+    int pengirimIndex =
+        _daftarakun.indexWhere((user) => user['username'] == usernamePengirim);
+    if (pengirimIndex != -1) {
+      List<Map<String, dynamic>> dikirim =
+          _daftarakun[pengirimIndex]['dikirim'] != null
+              ? List<Map<String, dynamic>>.from(
+                  _daftarakun[pengirimIndex]['dikirim'])
+              : [];
+      dikirim.add(newDikirim);
+      _daftarakun[pengirimIndex]['dikirim'] = dikirim;
+    }
+
+    // Cari pengguna dengan username penerima
+    int penerimaIndex =
+        _daftarakun.indexWhere((user) => user['username'] == usernamePenerima);
+    if (penerimaIndex != -1) {
+      List<Map<String, dynamic>> diterima =
+          _daftarakun[penerimaIndex]['diterima'] != null
+              ? List<Map<String, dynamic>>.from(
+                  _daftarakun[penerimaIndex]['diterima'])
+              : [];
+      diterima.add(newDiterima);
+      _daftarakun[penerimaIndex]['diterima'] = diterima;
+    }
+
     notifyListeners();
   }
 
@@ -712,8 +806,11 @@ class ProvUtama extends ChangeNotifier {
     String password,
   ) {
     _daftarakun.add({
+      "desc":
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
       "username": username,
       "nama": nama,
+      "img" : "assets/jokowi.jpg",
       "email": email,
       "tanggal_lahir": tanggal_lahir,
       "password": password,
@@ -749,4 +846,105 @@ class ProvUtama extends ChangeNotifier {
     _islogin = _daftarakun[indexlogin];
     notifyListeners();
   }
+
+  List<Map<String,dynamic>> sortedakun = [];
+
+  void earlyAll(){
+    
+    dynamic _sorted = _daftarakun;
+    int lengthOfArray = _sorted.length;
+    for (int i = 0; i < lengthOfArray - 1; i++) {
+      for (int j = 0; j < lengthOfArray - i - 1; j++) {
+        if (_sorted[j]["totalPendapatan"] < _sorted[j + 1]["totalPendapatan"]) {
+          // Swapping using temporary variable
+          dynamic temp = _sorted[j];
+          _sorted[j] = _sorted[j + 1];
+          _sorted[j + 1] = temp;
+        }
+      }
+    }
+    sortedakun = _sorted;
+
+  }
+  void byAll(){
+    updateTotalPendapatan();
+    
+    dynamic _sortedall = _daftarakun;
+    
+    int lengthOfArray = _sortedall.length;
+    for (int i = 0; i < lengthOfArray - 1; i++) {
+      for (int j = 0; j < lengthOfArray - i - 1; j++) {
+        if (_sortedall[j]["totalPendapatan"] < _sortedall[j + 1]["totalPendapatan"]) {
+          // Swapping using temporary variable
+          dynamic temp = _sortedall[j];
+          _sortedall[j] = _sortedall[j + 1];
+          _sortedall[j + 1] = temp;
+        }
+      }
+    }
+    sortedakun = _sortedall;
+    notifyListeners();
+  }
+  
+  void byYear(){
+    
+    dynamic _sorted = _daftarakun;
+
+    int _totalP = 0;
+
+    for (int i = 0; i < _sorted.length; i++){
+      for(int j = 0; j < _sorted[i]["diterima"].length; j++){
+        if(_sorted[i]["diterima"][j]["tgl"].year == DateTime.now().year){
+          _totalP += _sorted[i]["diterima"][j]["jumlah"] as int;
+        }
+      }
+        _sorted[i]["totalPendapatan"] = _totalP;
+        _totalP = 0;
+    }
+
+    int lengthOfArray = _sorted.length;
+    for (int i = 0; i < lengthOfArray - 1; i++) {
+      for (int j = 0; j < lengthOfArray - i - 1; j++) {
+        if (_sorted[j]["totalPendapatan"] < _sorted[j + 1]["totalPendapatan"]) {
+          // Swapping using temporary variable
+          dynamic temp = _sorted[j];
+          _sorted[j] = _sorted[j + 1];
+          _sorted[j + 1] = temp;
+        }
+      }
+    }
+    sortedakun = _sorted;
+    notifyListeners();
+  }
+  void byMonth(){
+    
+    dynamic _sorted = _daftarakun;
+
+    int _totalP = 0;
+
+    for (int i = 0; i < _sorted.length; i++){
+      for(int j = 0; j < _sorted[i]["diterima"].length; j++){
+        if(_sorted[i]["diterima"][j]["tgl"].month == DateTime.now().month){
+          _totalP += _sorted[i]["diterima"][j]["jumlah"] as int;
+        }
+      }
+        _sorted[i]["totalPendapatan"] = _totalP;
+        _totalP = 0;
+    }
+
+    int lengthOfArray = _sorted.length;
+    for (int i = 0; i < lengthOfArray - 1; i++) {
+      for (int j = 0; j < lengthOfArray - i - 1; j++) {
+        if (_sorted[j]["totalPendapatan"] < _sorted[j + 1]["totalPendapatan"]) {
+          // Swapping using temporary variable
+          dynamic temp = _sorted[j];
+          _sorted[j] = _sorted[j + 1];
+          _sorted[j + 1] = temp;
+        }
+      }
+    }
+    sortedakun = _sorted;
+    notifyListeners();
+  }
+
 }

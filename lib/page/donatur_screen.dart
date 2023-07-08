@@ -16,7 +16,8 @@ class DonaturScreen extends StatelessWidget {
       child: Container(
         width: 500,
         height: 500,
-        child: ListView.builder(
+        child: riwayatdonatur.length == 0? Align(alignment: Alignment.center,child: Text("Kosong", style: TextStyle(fontSize: 25),))
+        : ListView.builder(
           itemCount: riwayatdonatur.length,
           itemBuilder: (context, index) {
             var donatur = riwayatdonatur[index];
@@ -56,6 +57,10 @@ class DonaturScreen extends StatelessWidget {
                       label: 'Pesan',
                       value: donatur['pesan'],
                     ),
+                    DonaturInfoRow(
+                      label: 'Metode Pembayaran',
+                      value: donatur['metode'],
+                    ),
                   ],
                 ),
               ),
@@ -83,14 +88,14 @@ class DonaturInfoRow extends StatelessWidget {
           SizedBox(
             width: 120,
             child: Text(
-              '$label:',
+              '$label ',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           SizedBox(width: 8.0),
           Expanded(
             child: Text(
-              value,
+              ": ${value}",
               style: TextStyle(color: Colors.black),
             ),
           ),
