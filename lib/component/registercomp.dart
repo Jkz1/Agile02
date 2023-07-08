@@ -208,7 +208,7 @@ class _RegisterCompState extends State<RegisterComp> {
                               });
                             }
                             // setState(() {});
-                            if (!passwordStatus && !usernameStatus) {
+                            if (password.text == konfirmasipassword.text && username.text.length >= 5) {
                               registerProvider.register(
                                   username.text,
                                   nama.text,

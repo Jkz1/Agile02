@@ -30,7 +30,7 @@ class _PaymentState extends State<Payment> {
   Widget build(BuildContext context) {
     final mainProv = Provider.of<DataProvider>(context);
     final paymentOpt = Provider.of<PaymentOptProv>(context);
-    final pageprov = Provider.of<pageProv>(context);
+    final pageprov = Provider.of<PageProv>(context);
     String? usernamePenerima = widget.usernamePenerima;
 
     final user = mainProv.users.firstWhere(

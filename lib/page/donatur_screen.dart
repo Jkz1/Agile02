@@ -1,3 +1,5 @@
+import 'package:agile02/providers/donation_provider.dart';
+import 'package:agile02/providers/provUtama.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -6,28 +8,20 @@ import 'package:agile02/providers/data_provider.dart';
 class DonaturScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var donaturProvider = Provider.of<DataProvider>(context);
-    var userLogin = donaturProvider.userLogin;
-    var users = donaturProvider.users;
-
-    // Cari indeks user yang sesuai dengan userLogin
-    var penggunaIndex =
-        users.indexWhere((user) => user['username'] == userLogin);
-    var diterima = <Map<String, dynamic>>[];
-
-    if (penggunaIndex != -1) {
-      diterima = (users[penggunaIndex]['diterima'] as List<dynamic>)
-          .cast<Map<String, dynamic>>();
-    }
+    var mainProv = Provider.of<ProvUtama>(context);
+    var userLogin = mainProv.islogin;
+    var riwayatdonatur = userLogin["diterima"];
 
     return Center(
       child: Container(
         width: 500,
-        height: 700,
+        height: 500,
         child: ListView.builder(
-          itemCount: diterima.length,
+          itemCount: riwayatdonatur.length,
           itemBuilder: (context, index) {
-            var donasi = diterima[index];
+            var donatur = riwayatdonatur[index];
+            var tgl = donatur["tgl"];
+            String tglString = "${tgl.year}-${tgl.month}-${tgl.day}";
             return Card(
               elevation: 2.0,
               margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
@@ -43,28 +37,28 @@ class DonaturScreen extends StatelessWidget {
                   children: [
                     DonaturInfoRow(
                       label: 'Nama Pengirim',
-                      value: donasi['nama_pengirim'],
+                      value: donatur['pengirim'],
                     ),
                     DonaturInfoRow(
                       label: 'Email Pengirim',
-                      value: donasi['email_pengirim'],
+                      value: donatur['email'],
                     ),
                     DonaturInfoRow(
                       label: 'Tanggal',
-                      value: donasi['tanggal'],
+                      value: tglString,
                     ),
                     DonaturInfoRow(
                       label: 'Jumlah Diterima',
                       value:
-                          'Rp. ${NumberFormat.currency(locale: 'id_ID', symbol: '').format(donasi['jumlah_diterima'])}',
+                          'Rp. ${NumberFormat.currency(locale: 'id_ID', symbol: '').format(donatur['jumlah'])}',
                     ),
                     DonaturInfoRow(
                       label: 'Pesan',
-                      value: donasi['pesan'],
+                      value: donatur['pesan'],
                     ),
                     DonaturInfoRow(
                       label: 'Metode Pembayaran',
-                      value: donasi['metode'],
+                      value: donatur['metode'],
                     ),
                   ],
                 ),

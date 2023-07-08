@@ -8,6 +8,7 @@ import 'package:agile02/providers/donation_model.dart';
 import 'package:agile02/providers/listakun.dart';
 import 'package:agile02/providers/pageProv.dart';
 import 'package:agile02/providers/payment_opt_prov.dart';
+import 'package:agile02/providers/provUtama.dart';
 import 'package:agile02/providers/trending_data.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => AboutAkun()),
         ChangeNotifierProvider(create: (_) => DonationProvider()),
         ChangeNotifierProvider(create: (_) => TrendingData()),
-        ChangeNotifierProvider(create: (_) => pageProv()),
+        ChangeNotifierProvider(create: (_) => PageProv()),
+        ChangeNotifierProvider(create: (context) => ProvUtama()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -21,7 +21,7 @@ class _TemplateState extends State<Template> {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<DataProvider>(context);
-    final pageprov = Provider.of<pageProv>(context);
+    final pageprov = Provider.of<PageProv>(context);
     return Scaffold(
       appBar: AppBar(
         title: Image.asset('assets/title.png'),

@@ -382,6 +382,8 @@ class DataProvider extends ChangeNotifier {
   void login(String email, String password, Function(String username) onSuccess,
       Function(String) onError) {
     bool isLoginSuccessful = false;
+    print(email);
+    print(password);
     for (var user in users) {
       if (user['email'] == email && user['password'] == password) {
         isLoginSuccessful = true;

@@ -6,6 +6,7 @@ import 'package:agile02/page/homepage.dart';
 import 'package:agile02/page/listcreator.dart';
 import 'package:agile02/providers/data_provider.dart';
 import 'package:agile02/providers/pageProv.dart';
+import 'package:agile02/providers/provUtama.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -21,16 +22,17 @@ class UtamaHome extends StatefulWidget {
 class _UtamaHomeState extends State<UtamaHome> {
   @override
   Widget build(BuildContext context) {
-    final pageprov = Provider.of<pageProv>(context);
-    final user = Provider.of<DataProvider>(context);
+    final pageprov = Provider.of<PageProv>(context);
+    final user = Provider.of<ProvUtama>(context);
     return Scaffold(
       appBar: AppBar(
+        leading: Container(),
         title: Image.asset('assets/title.png'),
         actions: [
-          if (user.isLoggedIn)
+          if (user.islogin != "")
             PopupMenuButton<String>(
               onSelected: (String value) {
-                if (!user.isLoggedIn) {
+                if (user.islogin == "") {
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -66,8 +68,7 @@ class _UtamaHomeState extends State<UtamaHome> {
                         MaterialPageRoute(builder: (_) => UtamaHome()));
                   } else if (value == "logout") {
                     setState(() {
-                      user.setLoggedIn = false;
-                      user.setUserLogin = "";
+                      user.setislogin = "";
                       pageprov.setselectedPage = 0;
                     });
                     Navigator.of(context).pop();
