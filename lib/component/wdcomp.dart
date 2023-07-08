@@ -228,16 +228,8 @@ class _WDCompState extends State<WDComp> {
                             ElevatedButton(
                               onPressed: () {
                                 if (metodePenarikan != null && jumlahwd.text != "" && jumlahwd.text != "0" && int.parse(jumlahwd.text) <= userLogin["danaSekarang"] && norek.text != "" && namabank.text != "" && an.text != "") {
-                                  print("Ter isi semua");
-                                  // user.tarikSaldo(
-                                  //     user.userLogin,
-                                  //     metodePenarikan!,
-                                  //     jumlahWD!,
-                                  //     namaBank!,
-                                  //     noRek!,
-                                  //     aN!);
-                                  // metodePenarikan = null;
-                                  // jumlahwd.clear();
+                                  user.transaksi(metodePenarikan!, noRek!, namaBank!, jumlahwd.text);
+                                  Navigator.pop(context);
                                 } else {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(const SnackBar(

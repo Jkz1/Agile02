@@ -82,11 +82,7 @@ class _AboutMeState extends State<AboutMe> {
     );
   }
 
-  @override
-  void initState() {
-    super.initState();
-    Provider.of<ProvUtama>(context, listen: false).updateTotalPendapatan();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -147,6 +143,7 @@ class _AboutMeState extends State<AboutMe> {
                   height: 10,
                 ),
                 DonationScreen(),
+                SizedBox(height: 15,),
                 Container(
                   decoration: BoxDecoration(color: Color(0xffD9D9D9)),
                   child: Column(

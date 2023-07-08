@@ -2,6 +2,7 @@ import 'package:agile02/page/about.dart';
 import 'package:agile02/page/popular.dart';
 import 'package:agile02/providers/data_provider.dart';
 import 'package:agile02/providers/listakun.dart';
+import 'package:agile02/providers/provUtama.dart';
 import 'package:agile02/temp.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +29,7 @@ class _ListaccState extends State<Listacc> {
 
   @override
   Widget build(BuildContext context) {
-    final dataprovider = Provider.of<DataProvider>(context);
+    final dataprovider = Provider.of<ProvUtama>(context);
 
     return SingleChildScrollView(
       child: Padding(
@@ -36,13 +37,12 @@ class _ListaccState extends State<Listacc> {
         child: Column(
           children: [
             Container(
-              width: 620,
               child: TextField(
                 controller: _searchController,
                 onChanged: (value) {
                   setState(() {
                     searchinput = value;
-                    _filteredCards = dataprovider.users
+                    _filteredCards = dataprovider.daftarakun
                         .where((user) => user['nama']
                             .toString()
                             .toLowerCase()
@@ -75,26 +75,20 @@ class _ListaccState extends State<Listacc> {
                 ),
               ),
             ),
+            SizedBox(height: 10,),
             if (searchinput != "")
               Container(
                 width: 700,
                 height: MediaQuery.of(context).size.height -
                     120, // Atur tinggi container sesuai kebutuhan
-                child: GridView.count(
-                  shrinkWrap: true,
-                  crossAxisCount: 2,
-                  childAspectRatio: 300 / 360,
-                  padding: EdgeInsets.all(20.0),
-                  mainAxisSpacing: 40.0,
-                  crossAxisSpacing: 20.0,
+                child: Wrap(
                   children: _filteredCards.asMap().entries.map((entry) {
                     var index = entry.key;
                     var user = entry.value;
                     String name = user['nama'];
+                    dynamic splitted = name.split(" ");
                     String username = user['username'];
-                    String imgProfil = user['img_profil'];
-                    String category = user['job'].join();
-
+                    String imgProfil = user['img'];
                     return InkWell(
                       onTap: () {
                         print('Card tapped: $name');
@@ -107,78 +101,64 @@ class _ListaccState extends State<Listacc> {
                       },
                       child: Card(
                         child: Container(
+                          width: MediaQuery.of(context).size.width/2.3,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                height: 220.0,
                                 color: Colors.white,
                                 child: Center(
                                   child: CircleAvatar(
-                                    radius: 100.0,
+                                    radius: 50.0,
                                     backgroundImage: AssetImage(imgProfil),
                                   ),
                                 ),
                               ),
-                              Expanded(
-                                child: Container(
-                                  color: Colors.grey.shade300,
-                                  width: double.infinity,
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Center(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            name,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.green.shade900,
-                                              fontSize: 36,
-                                            ),
+                              Container(
+                                color: Colors.grey.shade300,
+                                width: double.infinity,
+                                padding: EdgeInsets.all(8.0),
+                                child: Center(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          splitted[0],
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.green.shade900,
+                                            fontSize: 36,
                                           ),
                                         ),
-                                        SizedBox(height: 1.0),
-                                        Align(
-                                          alignment: Alignment.center,
-                                          child: RichText(
-                                            text: TextSpan(
-                                              children: <TextSpan>[
-                                                TextSpan(
-                                                  text: '@',
-                                                  style: TextStyle(
-                                                      fontSize: 18,
-                                                      color:
-                                                          Colors.grey.shade600),
-                                                ),
-                                                TextSpan(
-                                                  text: username,
-                                                  style: TextStyle(
-                                                      fontSize: 18,
-                                                      color:
-                                                          Colors.grey.shade600),
-                                                ),
-                                              ],
-                                            ),
+                                      ),
+                                      SizedBox(height: 1.0),
+                                      Align(
+                                        alignment: Alignment.center,
+                                        child: RichText(
+                                          text: TextSpan(
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                text: '@',
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    color:
+                                                        Colors.grey.shade600),
+                                              ),
+                                              TextSpan(
+                                                text: username,
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    color:
+                                                        Colors.grey.shade600),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                        SizedBox(height: 26.0),
-                                        Align(
-                                          alignment: Alignment.center,
-                                          child: Text(
-                                            category,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16,
-                                              color: Colors.red.shade800,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),

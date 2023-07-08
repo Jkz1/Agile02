@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:agile02/providers/data_provider.dart';
 import 'package:intl/intl.dart';
 
+import '../providers/provUtama.dart';
+
 class RegisterComp extends StatefulWidget {
   final TextEditingController usernameInputRegister;
 
@@ -19,6 +21,8 @@ class _RegisterCompState extends State<RegisterComp> {
   final TextEditingController _tglLahirController = TextEditingController();
 
   late String tgl_lahir;
+
+  DateTime? tglLahir;
 
   TextEditingController username = TextEditingController();
   TextEditingController nama = TextEditingController();
@@ -53,6 +57,7 @@ class _RegisterCompState extends State<RegisterComp> {
     final TextEditingController usernameInputRegister =
         widget.usernameInputRegister;
     final registerProvider = Provider.of<DataProvider>(context);
+    final mainprov = Provider.of<ProvUtama>(context);
 
     return SingleChildScrollView(
       child: Container(
@@ -134,6 +139,7 @@ class _RegisterCompState extends State<RegisterComp> {
                           );
                           if (selectedDate != null) {
                             setState(() {
+                              tglLahir = selectedDate;
                               tgl_lahir =
                                   DateFormat('yyyy-MM-dd').format(selectedDate);
                               _tglLahirController.text = tgl_lahir;
@@ -209,11 +215,18 @@ class _RegisterCompState extends State<RegisterComp> {
                             }
                             // setState(() {});
                             if (password.text == konfirmasipassword.text && username.text.length >= 5) {
-                              registerProvider.register(
+                              // "username": "JokotiHD",
+                              // "nama": "Joko",
+                              // "email": "asd",
+                              // "tanggal_lahir": DateTime(2003, 3, 14),
+                              // "password": "asd",
+                              // "totalPendapatan" : 0,
+                              // "danaSekarang" : 0,
+                              mainprov.addakun(
                                   username.text,
                                   nama.text,
                                   email.text,
-                                  tgl_lahir,
+                                  tglLahir!,
                                   password.text);
                               Navigator.pop(context);
                             } else {

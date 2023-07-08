@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TrendingData extends ChangeNotifier{
-  List<bool> _timeOpt = [true, false, false];
+  List<bool> _timeOpt = [false, false, true];
 
   List<bool> get timeOpt => _timeOpt;
 

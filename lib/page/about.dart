@@ -8,6 +8,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:universal_io/io.dart';
 
+import '../providers/provUtama.dart';
+
 class About extends StatefulWidget {
   final String username;
 
@@ -22,19 +24,8 @@ class _AboutState extends State<About> {
 
   @override
   Widget build(BuildContext context) {
-    final dataprovider = Provider.of<DataProvider>(context);
-    final userData = dataprovider.users.firstWhere(
-      (user) => user['username'] == widget.username,
-      orElse: () => {},
-    );
-
-    if (userData.isEmpty) {
-      return Scaffold(
-        body: Center(
-          child: Text('User not found.'),
-        ),
-      );
-    }
+    final dataprovider = Provider.of<ProvUtama>(context);
+    final userData = dataprovider.islogin;
 
     openUrl(String urltujuan) async {
       Uri _urlUri = Uri.parse(urltujuan);
@@ -61,7 +52,7 @@ class _AboutState extends State<About> {
                   backgroundColor: Color(0xff0C5513),
                   radius: 63,
                   child: CircleAvatar(
-                    backgroundImage: AssetImage(userData['img_profil'] ?? ''),
+                    backgroundImage: AssetImage(userData['img'] ?? ''),
                     radius: 60,
                   ),
                 ),
@@ -78,10 +69,6 @@ class _AboutState extends State<About> {
                 ),
                 SizedBox(
                   height: 7,
-                ),
-                Text(
-                  userData['job'] != null ? userData['job'].join(" ") : "",
-                  style: TextStyle(color: Colors.white),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

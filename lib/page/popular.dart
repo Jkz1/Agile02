@@ -2,7 +2,10 @@ import 'package:agile02/component/trendingOpt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/provUtama.dart';
 import '../temp.dart';
 
 class Popular extends StatefulWidget {
@@ -13,10 +16,15 @@ class Popular extends StatefulWidget {
 }
 
 class _PopularState extends State<Popular> {
-  List<bool> _selected = [true, false, false];
 
   @override
   Widget build(BuildContext context) {
+    final mainprov = Provider.of<ProvUtama>(context);
+
+    List<Map<String,dynamic>> sortedakun = mainprov.daftarakun;
+    sortedakun.sort((b,a) => a["totalPendapatan"].compareTo(b["totalPendapatan"]));
+
+
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Center(
@@ -90,27 +98,23 @@ class _PopularState extends State<Popular> {
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
                             ),
-                            title: Text(
-                              "Bobby B.",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 20),
-                            ),
-                            subtitle: Text(
-                              "Gamers, artist",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
-                            ),
-                            trailing: Column(
+                            title: 
+                                Text(
+                                  mainprov.daftarakun[index]["nama"],
+                                  style:
+                                      TextStyle(color: Colors.white, fontSize: 20),
+                                ),
+                            subtitle: Column(
                               children: [
                                 Text(
-                                  "Rp 1jt",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20),
-                                ),
-                                Text(
-                                  "this week",
+                                  "RP. ${NumberFormat.currency(locale: 'id_ID', symbol: '').format(sortedakun[index]["totalPendapatan"])}",
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 15),
+                                ),
+                                Text(
+                                  "all the time",
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 12),
                                 )
                               ],
                             ),

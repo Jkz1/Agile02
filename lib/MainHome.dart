@@ -66,17 +66,19 @@ class _UtamaHomeState extends State<UtamaHome> {
                     Navigator.of(context).pop();
                     Navigator.push(context,
                         MaterialPageRoute(builder: (_) => UtamaHome()));
-                  } else if (value == "logout") {
-                    setState(() {
-                      user.setislogin = "";
-                      pageprov.setselectedPage = 0;
-                    });
-                    Navigator.of(context).pop();
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => MainHome()),
-                      (route) => false,
-                    );
+                  } else if (value == "logout"){
+                    logout()async{
+                      await Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => MainHome()),
+                        (route) => false,
+                      );
+                      setState(() {
+                        user.setislogin = "";
+                        pageprov.setselectedPage = 0;
+                      });
+                    }
+                    logout();
                   }
                 }
               },

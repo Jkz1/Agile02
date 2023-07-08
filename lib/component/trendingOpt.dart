@@ -12,27 +12,22 @@ class TrendingBoxOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<TrendingData>(context);
-    return GestureDetector(
-      onTap: () {
-        prov.changeOption(idx);
-      },
-      child: Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18),
-            color: prov.timeOpt[idx] ? Color(0xff30A92D) : Colors.grey,
-            border: Border.all(
-                color: prov.timeOpt[idx]
-                    ? Color(0xff0C5513)
-                    : Color.fromARGB(255, 34, 34, 34),
-                    width: 1.5)),
-        child: AnimatedDefaultTextStyle(
-          duration: Duration(milliseconds: 300),
-          style:
-              TextStyle(color: prov.timeOpt[idx] ? Colors.white : Colors.black, fontSize: 18),
-          child: Text(
-            txt,
-          ),
+    return Container(
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(18),
+          color: prov.timeOpt[idx] ? Color(0xff30A92D) : Colors.grey,
+          border: Border.all(
+              color: prov.timeOpt[idx]
+                  ? Color(0xff0C5513)
+                  : Color.fromARGB(255, 34, 34, 34),
+                  width: 1.5)),
+      child: AnimatedDefaultTextStyle(
+        duration: Duration(milliseconds: 300),
+        style:
+            TextStyle(color: prov.timeOpt[idx] ? Colors.white : Colors.black, fontSize: 18),
+        child: Text(
+          txt,
         ),
       ),
     );

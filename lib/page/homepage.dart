@@ -1,9 +1,12 @@
+import 'package:agile02/page/listcreator.dart';
 import 'package:agile02/page/login.dart';
 import 'package:agile02/page/register.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/provUtama.dart';
 import '../temp.dart';
 
 class MainHome extends StatefulWidget {
@@ -16,6 +19,12 @@ class MainHome extends StatefulWidget {
 class _MainHomeState extends State<MainHome> {
   TextEditingController usernameInputRegister = TextEditingController();
   @override
+  void initState() {
+    super.initState();
+    Provider.of<ProvUtama>(context, listen: false).updateTotalPendapatan();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var berbagi;
     return Template(
@@ -27,26 +36,30 @@ class _MainHomeState extends State<MainHome> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  TextButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text("Informasi"),
-                            content: Text(
-                                "Anda harus Login untuk melihat atau mencari Creator"),
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: Text("OK"),
-                              ),
-                            ],
-                          );
-                        },
-                      );
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => Template(child: Listacc())));
+                      // showDialog(
+                      //   context: context,
+                      //   builder: (BuildContext context) {
+                      //     return AlertDialog(
+                      //       title: Text("Informasi"),
+                      //       content: Text(
+                      //           "Anda harus Login untuk melihat atau mencari Creator"),
+                      //       actions: [
+                      //         TextButton(
+                      //           onPressed: () {
+                      //             Navigator.of(context).pop();
+                      //           },
+                      //           child: Text("OK"),
+                      //         ),
+                      //       ],
+                      //     );
+                      //   },
+                      // );
                     },
                     child: Row(
                       children: [
